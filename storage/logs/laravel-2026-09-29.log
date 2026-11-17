@@ -1,0 +1,20 @@
+[2026-09-29 10:38:46] local.ERROR: Cannot instantiate interface PHPUnit\Runner\TestSuiteLoader {"exception":"[object] (Error(code: 0): Cannot instantiate interface PHPUnit\\Runner\\TestSuiteLoader at D:\\pub.affentro.com\\storage\\framework\\lsp-7b6af1e65f3904c8.php:225)
+[stacktrace]
+#0 D:\\pub.affentro.com\\storage\\framework\\lsp-7b6af1e65f3904c8.php(79): class@anonymous->collectPhpUnitTests(Array)
+#1 [internal function]: class@anonymous->{closure}(Array, 0)
+#2 D:\\pub.affentro.com\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Arr.php(560): array_map(Object(Closure), Array, Array)
+#3 D:\\pub.affentro.com\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Collection.php(768): Illuminate\\Support\\Arr::map(Array, Object(Closure))
+#4 D:\\pub.affentro.com\\storage\\framework\\lsp-7b6af1e65f3904c8.php(76): Illuminate\\Support\\Collection->map(Object(Closure))
+#5 D:\\pub.affentro.com\\storage\\framework\\lsp-7b6af1e65f3904c8.php(294): class@anonymous->all()
+#6 {main}
+"} 
+[2026-09-29 16:13:29] local.ERROR: Cannot instantiate interface PHPUnit\Runner\TestSuiteLoader {"exception":"[object] (Error(code: 0): Cannot instantiate interface PHPUnit\\Runner\\TestSuiteLoader at D:\\pub.affentro.com\\storage\\framework\\lsp-11d423fa560d7b29.php:225)
+[stacktrace]
+#0 D:\\pub.affentro.com\\storage\\framework\\lsp-11d423fa560d7b29.php(79): class@anonymous->collectPhpUnitTests(Array)
+#1 [internal function]: class@anonymous->{closure}(Array, 0)
+#2 D:\\pub.affentro.com\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Arr.php(560): array_map(Object(Closure), Array, Array)
+#3 D:\\pub.affentro.com\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Collection.php(768): Illuminate\\Support\\Arr::map(Array, Object(Closure))
+#4 D:\\pub.affentro.com\\storage\\framework\\lsp-11d423fa560d7b29.php(76): Illuminate\\Support\\Collection->map(Object(Closure))
+#5 D:\\pub.affentro.com\\storage\\framework\\lsp-11d423fa560d7b29.php(294): class@anonymous->all()
+#6 {main}
+"} 

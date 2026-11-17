@@ -1,0 +1,10 @@
+[2026-09-30 17:36:25] local.ERROR: Cannot instantiate interface PHPUnit\Runner\TestSuiteLoader {"exception":"[object] (Error(code: 0): Cannot instantiate interface PHPUnit\\Runner\\TestSuiteLoader at D:\\pub.thousandslink.com\\storage\\framework\\lsp-3d6ea0214bd6d3ca.php:225)
+[stacktrace]
+#0 D:\\pub.thousandslink.com\\storage\\framework\\lsp-3d6ea0214bd6d3ca.php(79): class@anonymous->collectPhpUnitTests(Array)
+#1 [internal function]: class@anonymous->{closure}(Array, 0)
+#2 D:\\pub.thousandslink.com\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Arr.php(560): array_map(Object(Closure), Array, Array)
+#3 D:\\pub.thousandslink.com\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Collection.php(768): Illuminate\\Support\\Arr::map(Array, Object(Closure))
+#4 D:\\pub.thousandslink.com\\storage\\framework\\lsp-3d6ea0214bd6d3ca.php(76): Illuminate\\Support\\Collection->map(Object(Closure))
+#5 D:\\pub.thousandslink.com\\storage\\framework\\lsp-3d6ea0214bd6d3ca.php(294): class@anonymous->all()
+#6 {main}
+"} 

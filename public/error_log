@@ -1,0 +1,58 @@
+[05-May-2026 06:03:38 UTC] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/a69zy1h1y1ok/pub.affentro.com/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/a69zy1h1y1ok/pub.affentro.com/public/test.php(49): Illuminate\Support\Facades\Facade::__callStatic()
+#1 {main}
+  thrown in /home/a69zy1h1y1ok/pub.affentro.com/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[08-May-2026 16:36:20 UTC] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/a69zy1h1y1ok/pub.affentro.com/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/a69zy1h1y1ok/pub.affentro.com/public/test.php(49): Illuminate\Support\Facades\Facade::__callStatic()
+#1 {main}
+  thrown in /home/a69zy1h1y1ok/pub.affentro.com/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[08-May-2026 17:09:23 UTC] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/a69zy1h1y1ok/pub.affentro.com/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/a69zy1h1y1ok/pub.affentro.com/public/test.php(49): Illuminate\Support\Facades\Facade::__callStatic()
+#1 {main}
+  thrown in /home/a69zy1h1y1ok/pub.affentro.com/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[22-May-2026 11:37:05 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 11:37:11 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 11:37:16 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 11:37:23 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 11:47:06 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 11:47:07 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 11:49:42 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 11:50:33 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 11:50:39 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 11:50:40 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 11:50:52 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 11:51:10 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 14:32:37 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 16:56:56 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 16:56:58 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 16:57:05 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[22-May-2026 16:57:13 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[23-May-2026 11:29:21 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[23-May-2026 11:29:29 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[23-May-2026 11:29:50 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[01-Jun-2026 15:24:46 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[01-Jun-2026 15:24:54 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/StringHelper.php on line 495
+[03-Jun-2026 11:38:57 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Coordinate.php on line 35
+[03-Jun-2026 11:44:31 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[03-Jun-2026 11:44:47 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[03-Jun-2026 11:45:09 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[03-Jun-2026 11:45:37 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[03-Jun-2026 11:45:45 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194304 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Cell.php on line 209
+[16-Jun-2026 12:55:49 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 40960 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/composer/ClassLoader.php on line 576
+[22-Jun-2026 10:57:48 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 10485760 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Collection/Cells.php on line 395
+[22-Jun-2026 10:59:01 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 10485760 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Collection/Cells.php on line 395
+[22-Jun-2026 10:59:42 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 10485760 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Collection/Cells.php on line 395
+[22-Jun-2026 11:10:24 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 10485760 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Collection/Cells.php on line 395
+[22-Jun-2026 14:07:08 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 10485760 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Collection/Cells.php on line 395
+[22-Jun-2026 14:10:02 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 10485760 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Collection/Cells.php on line 395
+[22-Jun-2026 14:10:24 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 10485760 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Collection/Cells.php on line 395
+[22-Jun-2026 14:35:45 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 10485760 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Collection/Cells.php on line 395
+[22-Jun-2026 14:43:16 Asia/Karachi] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 10485760 bytes) in /home/a69zy1h1y1ok/pub.affentro.com/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Collection/Cells.php on line 395
+[25-Jul-2026 14:06:22 UTC] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/a69zy1h1y1ok/pub.affentro.com/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/a69zy1h1y1ok/pub.affentro.com/public/test.php(49): Illuminate\Support\Facades\Facade::__callStatic()
+#1 {main}
+  thrown in /home/a69zy1h1y1ok/pub.affentro.com/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
