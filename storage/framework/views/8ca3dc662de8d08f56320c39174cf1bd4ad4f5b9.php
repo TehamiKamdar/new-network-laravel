@@ -1,4 +1,4 @@
-<?php if (! $__env->hasRenderedOnce('484c8293-550f-4615-8dba-a87a9468ce5e')): $__env->markAsRenderedOnce('484c8293-550f-4615-8dba-a87a9468ce5e');
+<?php if (! $__env->hasRenderedOnce('64ce6a82-9dd7-48cb-9bd9-4b0da04cb4a9')): $__env->markAsRenderedOnce('64ce6a82-9dd7-48cb-9bd9-4b0da04cb4a9');
 $__env->startPush('styles'); ?>
 
 <link rel="stylesheet" href="<?php echo e(\App\Helper\Static\Methods::staticAsset("vendor_assets/css/select2.min.css")); ?>" />
@@ -250,7 +250,7 @@ $__env->startPush('styles'); ?>
     Brands
 <?php $__env->stopPush(); ?>
 
-<?php if (! $__env->hasRenderedOnce('abf07f5f-3065-44c8-a055-6adc3ae081f5')): $__env->markAsRenderedOnce('abf07f5f-3065-44c8-a055-6adc3ae081f5');
+<?php if (! $__env->hasRenderedOnce('141b8917-5c67-449a-b8f2-7def19461f77')): $__env->markAsRenderedOnce('141b8917-5c67-449a-b8f2-7def19461f77');
 $__env->startPush('scripts'); ?>
 <script src="<?php echo e(\App\Helper\Static\Methods::staticAsset("vendor_assets/js/select2.full.min.js")); ?>"></script>
 <script src="<?php echo e(\App\Helper\Static\Methods::staticAsset("vendor_assets/js/drawer.js")); ?>"></script>
@@ -578,6 +578,122 @@ $__env->startPush('scripts'); ?>
         });
     });
 </script>
+<script>
+function viewBrandDetails(url) {
+
+    $('#company-view-detail').html(`
+        <div class="card-body text-center py-5">
+            <div class="spinner-border text-primary"></div>
+            <p class="text-muted mt-2">Loading brand details...</p>
+        </div>
+    `);
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+
+        success: function (response) {
+
+            if (response.success) {
+
+                let brand = response.data;
+                let countries = brand.country_full_name ?? [];
+
+                if (typeof countries === 'string') {
+                    try {
+                        countries = JSON.parse(countries);
+                    } catch (e) {
+                        countries = [countries];
+                    }
+                }
+
+                let location = Array.isArray(countries)
+                    ? (countries.length > 2 ? 'Multi' : countries.join(', '))
+                    : countries;
+
+                
+
+                    
+                $('#company-view-detail').html(`
+                <div class="card-body text-center">
+                    <h5 class="mt-3 mb-1">${escapeHtml(brand.name ?? 'N/A')}</h5>
+                    <p class="text-muted">(${escapeHtml(brand.sid ?? 'N/A')})</p>
+
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item avatar-xs">
+                            <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-15 rounded">
+                                <i class="ri-global-line"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item avatar-xs">
+                            <a href="javascript:void(0);" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
+                                <i class="ri-mail-line"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item avatar-xs">
+                            <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-15 rounded">
+                                <i class="ri-question-answer-line"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <h6 class="text-muted text-uppercase fw-semibold mb-3">Information</h6>
+                    <p class="text-muted mb-4">${escapeHtml(brand.short_description ?? 'N/A')}</p>
+                    <div class="table-responsive table-card">
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="fw-medium" scope="row">Location</td>
+                                    <td>${escapeHtml(location ?? 'N/A')}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium" scope="row">Commission</td>
+                                    <td>${escapeHtml(brand.commission ?? 'N/A')}${ brand.commission_type == "percentage" ? "%" : brand.commission_type }</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium" scope="row">APC</td>
+                                    <td>${escapeHtml(brand.average_payment_time ?? 'N/A')} days</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium" scope="row">Website</td>
+                                    <td>
+                                        <a href="${escapeHtml(brand.click_through_url ?? 'N/A')}" target="_blank" class="link-primary text-decoration-underline">${escapeHtml(brand.url ?? 'N/A')}</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium" scope="row">Currency</td>
+                                    <td>${escapeHtml(brand.currency_code ?? 'N/A')}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium" scope="row">Since</td>
+                                    <td>${escapeHtml(brand.created_at ?? 'N/A')}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    
+                `);
+            }
+        },
+
+        error: function () {
+            $('#company-view-detail').html(`
+                <div class="card-body text-center py-5">
+                    <i class="ri-error-warning-line fs-1 text-danger"></i>
+                    <p class="text-muted mt-2">Unable to load brand details.</p>
+                </div>
+            `);
+        }
+    });
+}
+
+function escapeHtml(value) {
+    return $('<div>').text(value).html();
+}
+</script>
 <?php $__env->stopPush(); endif; ?>
 
 <?php $__env->startSection("content"); ?>
@@ -588,7 +704,7 @@ $__env->startPush('scripts'); ?>
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                    <h4 class="mb-sm-0">Companies</h4>
+                    <h4 class="mb-sm-0">Brands</h4>
 
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
@@ -617,7 +733,36 @@ $__env->startPush('scripts'); ?>
                                         onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
                                     <button class="btn btn-danger material-shadow-none"><i
                                             class="ri-filter-2-line me-1 align-bottom"></i> Filters</button>
-                                    <button class="btn btn-soft-success material-shadow-none">Import</button>
+                                    <button class="btn btn-soft-success material-shadow-none" id="dropdownExport" data-bs-toggle="dropdown"
+                                    aria-expanded="false">Export</button>
+                                    <ul class="dropdown-menu export-menu" aria-labelledby="dropdownExport">
+                                        <?php
+                                            $queryParams = request()->all();
+                                        ?>
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="<?php echo e(route('publisher.export-advertisers', array_merge(['type' => 'csv'], $queryParams))); ?>">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                    <path d="M14 2v6h6" />
+                                                </svg>
+                                                <span><strong>Export as CSV</strong><span class="hint">Plain text, opens
+                                                        anywhere</span></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="<?php echo e(route('publisher.export-advertisers', array_merge(['type' => 'xlsx'], $queryParams))); ?>">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                    <path d="M14 2v6h6" />
+                                                    <path d="M8 14h8M8 18h5" />
+                                                </svg>
+                                                <span><strong>Export as Excel</strong><span class="hint">.xlsx with
+                                                        formatting</span></span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                     <button type="button" id="dropdownMenuLink1" data-bs-toggle="dropdown"
                                         aria-expanded="false" class="btn btn-soft-info material-shadow-none"><i
                                             class="ri-more-2-fill"></i></button>
@@ -661,248 +806,26 @@ $__env->startPush('scripts'); ?>
                         <div id="ap-overview" role="tabpanel" aria-labelledby="ap-overview-tab">
 
                         </div>
-                        <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content border-0">
-                                    <div class="modal-header bg-info-subtle p-3">
-                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                            id="close-modal"></button>
-                                    </div>
-                                    <form class="tablelist-form" autocomplete="off">
-                                        <div class="modal-body">
-                                            <input type="hidden" id="id-field" />
-                                            <div class="row g-3">
-                                                <div class="col-lg-12">
-                                                    <div class="text-center">
-                                                        <div class="position-relative d-inline-block">
-                                                            <div class="position-absolute bottom-0 end-0">
-                                                                <label for="company-logo-input" class="mb-0"
-                                                                    data-bs-toggle="tooltip" data-bs-placement="right"
-                                                                    title="Select Image">
-                                                                    <div class="avatar-xs cursor-pointer">
-                                                                        <div
-                                                                            class="avatar-title bg-light border rounded-circle text-muted">
-                                                                            <i class="ri-image-fill"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                </label>
-                                                                <input class="form-control d-none" value=""
-                                                                    id="company-logo-input" type="file"
-                                                                    accept="image/png, image/gif, image/jpeg">
-                                                            </div>
-                                                            <div class="avatar-lg p-1">
-                                                                <div class="avatar-title bg-light rounded-circle">
-                                                                    <img src="assets/images/users/multi-user.jpg"
-                                                                        id="companylogo-img"
-                                                                        class="avatar-md rounded-circle object-fit-cover" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <h5 class="fs-13 mt-3">Company Logo</h5>
-                                                    </div>
-                                                    <div>
-                                                        <label for="companyname-field" class="form-label">Name</label>
-                                                        <input type="text" id="companyname-field" class="form-control"
-                                                            placeholder="Enter company name" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div>
-                                                        <label for="owner-field" class="form-label">Owner Name</label>
-                                                        <input type="text" id="owner-field" class="form-control"
-                                                            placeholder="Enter owner name" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div>
-                                                        <label for="industry_type-field" class="form-label">Industry
-                                                            Type</label>
-                                                        <select class="form-select" id="industry_type-field">
-                                                            <option value="">Select industry type</option>
-                                                            <option value="Computer Industry">Computer Industry</option>
-                                                            <option value="Chemical Industries">Chemical Industries</option>
-                                                            <option value="Health Services">Health Services</option>
-                                                            <option value="Telecommunications Services">Telecommunications
-                                                                Services</option>
-                                                            <option value="Textiles: Clothing, Footwear">Textiles: Clothing,
-                                                                Footwear</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div>
-                                                        <label for="star_value-field" class="form-label">Rating</label>
-                                                        <input type="text" id="star_value-field" class="form-control"
-                                                            placeholder="Enter rating" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div>
-                                                        <label for="location-field" class="form-label">Location</label>
-                                                        <input type="text" id="location-field" class="form-control"
-                                                            placeholder="Enter location" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div>
-                                                        <label for="employee-field" class="form-label">Employee</label>
-                                                        <input type="text" id="employee-field" class="form-control"
-                                                            placeholder="Enter employee" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div>
-                                                        <label for="website-field" class="form-label">Website</label>
-                                                        <input type="text" id="website-field" class="form-control"
-                                                            placeholder="Enter website" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div>
-                                                        <label for="contact_email-field" class="form-label">Contact
-                                                            Email</label>
-                                                        <input type="text" id="contact_email-field" class="form-control"
-                                                            placeholder="Enter contact email" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div>
-                                                        <label for="since-field" class="form-label">Since</label>
-                                                        <input type="text" id="since-field" class="form-control"
-                                                            placeholder="Enter since" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <div class="hstack gap-2 justify-content-end">
-                                                <button type="button" class="btn btn-light"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-success" id="add-btn">Add
-                                                    Company</button>
-                                                <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end add modal-->
-
-                        <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1"
-                            aria-labelledby="deleteRecordLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="btn-close" id="deleteRecord-close"
-                                            data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
-                                    </div>
-                                    <div class="modal-body p-5 text-center">
-                                        <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
-                                            colors="primary:#405189,secondary:#f06548"
-                                            style="width:90px;height:90px"></lord-icon>
-                                        <div class="mt-4 text-center">
-                                            <h4 class="fs-semibold">You are about to delete a company ?</h4>
-                                            <p class="text-muted fs-14 mb-4 pt-1">Deleting your company will remove all of
-                                                your information from our database.</p>
-                                            <div class="hstack gap-2 justify-content-center remove">
-                                                <button
-                                                    class="btn btn-link link-success fw-medium text-decoration-none material-shadow-none"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="ri-close-line me-1 align-middle"></i> Close
-                                                </button>
-                                                <button class="btn btn-danger" id="delete-record">Yes, Delete It!!</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end delete modal -->
-
                     </div>
                 </div>
                 <!--end card-->
             </div>
             <!--end col-->
             <div class="col-xxl-3">
-                <div class="card" id="company-view-detail">
+                <div class="card" id="company-view-detail" style="position: sticky; top: 100px;">
                     <div class="card-body text-center">
-                        <div class="position-relative d-inline-block">
-                            <div class="avatar-md">
-                                <div class="avatar-title bg-light rounded-circle material-shadow">
-                                    <img src="assets/images/brands/mail_chimp.png" alt=""
-                                        class="avatar-sm rounded-circle object-fit-cover">
-                                </div>
-                            </div>
-                        </div>
-                        <h5 class="mt-3 mb-1">Syntyce Solution</h5>
-                        <p class="text-muted">Michael Morris</p>
-
-                        <ul class="list-inline mb-0">
-                            <li class="list-inline-item avatar-xs">
-                                <a href="javascript:void(0);"
-                                    class="avatar-title bg-success-subtle text-success fs-15 rounded">
-                                    <i class="ri-global-line"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item avatar-xs">
-                                <a href="javascript:void(0);"
-                                    class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
-                                    <i class="ri-mail-line"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item avatar-xs">
-                                <a href="javascript:void(0);"
-                                    class="avatar-title bg-warning-subtle text-warning fs-15 rounded">
-                                    <i class="ri-question-answer-line"></i>
-                                </a>
-                            </li>
-                        </ul>
+                        <h5 class="mt-3 mb-1">Brand Details</h5>
                     </div>
+
                     <div class="card-body">
-                        <h6 class="text-muted text-uppercase fw-semibold mb-3">Information</h6>
-                        <p class="text-muted mb-4">A company incurs fixed and variable costs such as the purchase of raw
-                            materials, salaries and overhead, as explained by AccountingTools, Inc. Business owners have the
-                            discretion to determine the actions.</p>
-                        <div class="table-responsive table-card">
-                            <table class="table table-borderless mb-0">
-                                <tbody>
-                                    <tr>
-                                        <td class="fw-medium" scope="row">Industry Type</td>
-                                        <td>Chemical Industries</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-medium" scope="row">Location</td>
-                                        <td>Damascus, Syria</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-medium" scope="row">Employee</td>
-                                        <td>10-50</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-medium" scope="row">Rating</td>
-                                        <td>4.0 <i class="ri-star-fill text-warning align-bottom"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-medium" scope="row">Website</td>
-                                        <td>
-                                            <a href="javascript:void(0);"
-                                                class="link-primary text-decoration-underline">www.syntycesolution.com</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-medium" scope="row">Contact Email</td>
-                                        <td>info@syntycesolution.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-medium" scope="row">Since</td>
-                                        <td>1995</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="text-center py-3">
+                            <i class="ri-information-line fs-1 text-muted"></i>
+                            <h6 class="text-muted mt-2 mb-1">View Brand Information</h6>
+                            <p class="text-muted mb-0">
+                                To see complete brand information, click on the
+                                <i class="ri-eye-fill align-middle"></i>
+                                (eye) icon.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -911,325 +834,40 @@ $__env->startPush('scripts'); ?>
     </div>
 
 
-    <div class="az-content az-content-dashboard">
-        <div class="container">
-            <div class="az-content-body">
-
-
-                <div class="row justify-content-between">
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <div class="filter-card filter-sticky">
-                            <!-- Header -->
-                            <div class="fc-head">
-                                <h5>
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M4 6h16M7 12h10M10 18h4" />
-                                    </svg>
-                                    Filters
-                                </h5>
-                            </div>
-
-                            <!-- Body -->
-                            <div class="fc-body">
-                                <!-- Search Filter -->
-                                <div class="filter-group">
-                                    <div class="fg-head">
-                                        <span class="t">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <circle cx="11" cy="11" r="7" />
-                                                <path d="m21 21-4.3-4.3" />
-                                            </svg>
-                                            Search
-                                        </span>
-                                        <a href="javascript:void(0)" id="clearSearchByName"
-                                            onclick="clearFilter('clearSearchByName')"
-                                            class="fg-clear <?php echo e(request()->search_by_name ? '' : 'd-none'); ?>">
-                                            <i class="fas fa-times me-1"></i> Clear
-                                        </a>
-                                    </div>
-
-                                    <div class="input-icon">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="11" cy="11" r="7" />
-                                            <path d="m21 21-4.3-4.3" />
-                                        </svg>
-                                        <input type="text" class="form-control w-100"
-                                            value="<?php echo e(request()->search_by_name); ?>" id="SearchByName"
-                                            placeholder="Search by brand name…">
-                                    </div>
-                                </div>
-
-                                <!-- Country Filter -->
-                                <div class="filter-group">
-                                    <div class="fg-head">
-                                        <span class="t">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <circle cx="12" cy="12" r="9" />
-                                                <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
-                                            </svg>
-                                            Country
-                                        </span>
-                                        <a href="javascript:void(0)" id="clearSearchByCountry"
-                                            onclick="clearFilter('clearSearchByCountry')"
-                                            class="fg-clear d-none <?php echo e(request()->search_by_country ? '' : 'd-none'); ?>">
-                                            <i class="fas fa-times me-1"></i> Clear
-                                        </a>
-                                    </div>
-
-                                    <div class="input-icon">
-                                        <select id="SearchByCountry" class="form-select w-100" multiple size="8">
-                                            <?php
-    $countriesArr = [];
-    if (str_contains(request()->search_by_country, ',')) {
-        $countriesArr = explode(',', request()->search_by_country);
-    } else {
-        $countriesArr = [request()->search_by_country];
-    }
-                                                                ?>
-                                            <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option <?php if(in_array($country['iso2'], $countriesArr)): ?> selected <?php endif; ?>
-                                                    value="<?php echo e($country['iso2']); ?>">
-                                                    <i class="fas fa-flag me-1"></i> <?php echo e($country['name']); ?>
-
-                                                </option>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </select>
-                                        <small class="filter-hint">Hold Ctrl/Cmd to select multiple</small>
-                                    </div>
-                                </div>
-
-                                <!-- Advertiser Type Filter -->
-                                <div class="mb-4 pb-3 border-bottom">
-                                    <h6 class="mb-3 fw-semibold d-flex align-items-center">
-                                        <i class="fas fa-users me-2 text-muted"></i> Brand Type
-                                    </h6>
-                                    <div class="form-check form-check-inline d-block mb-2">
-                                        <input class="form-check-input" type="radio" name="advertiserType"
-                                            id="advertiserAll" value="all" <?php echo e(request()->type == "third_party_advertiser" || empty(request()->type) ? "checked" : ""); ?>>
-                                        <label class="form-check-label" for="advertiserAll">
-                                            <i class="fas fa-layer-group me-1 text-primary"></i> All Brands
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline d-block mb-2">
-                                        <input class="form-check-input" type="radio" name="advertiserType"
-                                            id="advertiserThirdParty" value="third_party_advertiser" <?php echo e(request()->type == "third_party_advertiser" ? "checked" : ""); ?>>
-                                        <label class="form-check-label" for="advertiserThirdParty">
-                                            <i class="fas fa-user-friends me-1 text-warning"></i> Third-Party Brands
-                                        </label>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
+    
+    <div class="modal-basic modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+            <form action="q" method="POST" id="applyAdvertiser">
+                <?php echo csrf_field(); ?>
+                <input type="hidden" id="a_id" name="a_id">
+                <input type="hidden" id="a_name" name="a_name">
+                <div class="modal-content modal-bg-white">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Apply To Program</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="col-lg-9 col-md-4 col-sm-12">
-                        <?php echo $__env->make("partial.admin.alert", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
-                            <ul class="nav tab-pills" id="brandTabs" role="tablist">
+                    <div class="modal-body">
+                        <h6 class="apply-modal-name" id="advertiserName"></h6>
+                        <p class="apply-modal-id" id="advertiserID"></p>
 
-                                <?php if(request()->route()->getName() != "publisher.own-advertisers"): ?>
-                                    <li class="nav-item">
-                                        <button
-                                            class="nav-link <?php echo e(!request()->section || request()->section == 'all' ? 'active' : ''); ?>"
-                                            id="allBrands" data-section="all" type="button" role="tab">
-                                            All
-                                        </button>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <button class="nav-link <?php echo e(request()->section == 'new' ? 'active' : ''); ?>"
-                                            id="newBrands" data-section="new" type="button" role="tab">
-                                            Latest
-                                        </button>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <button class="nav-link <?php echo e(request()->section == 'not-joined' ? 'active' : ''); ?>"
-                                            id="notJoinedBrands" data-section="not-joined" type="button" role="tab">
-                                            Not Joined
-                                        </button>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <button class="nav-link <?php echo e(request()->section == 'pending' ? 'active' : ''); ?>"
-                                            id="pendingBrands" data-section="pending" type="button" role="tab">
-                                            Pending
-                                        </button>
-                                    </li>
-                                <?php endif; ?>
-
-                                <?php if(request()->route()->getName() == "publisher.own-advertisers"): ?>
-                                    <li class="nav-item">
-                                        <button
-                                            class="nav-link <?php echo e(request()->section == 'joined' || empty(request()->section) ? 'active' : ''); ?>"
-                                            id="joinedBrands" data-section="joined" type="button" role="tab">
-                                            Joined
-                                        </button>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <button class="nav-link <?php echo e(request()->section == 'hold' ? 'active' : ''); ?>"
-                                            id="holdBrands" data-section="hold" type="button" role="tab">
-                                            Hold
-                                        </button>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <button class="nav-link <?php echo e(request()->section == 'rejected' ? 'active' : ''); ?>"
-                                            id="rejectedBrands" data-section="rejected" type="button" role="tab">
-                                            Rejected
-                                        </button>
-                                    </li>
-                                <?php endif; ?>
-
-                            </ul>
-                            <div class="d-flex align-items-center gap-2 flex-wrap">
-                                <span class="count-chip">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20.6 12 12 20.6 3.4 12 12 3.4z" />
-                                    </svg>
-                                    Total brands <span class="n" id="totalAdvertiser">0</span>
-                                </span>
-
-                                <div class="dropdown">
-                                    <button class="btn btn-outline export-btn" data-bs-toggle="dropdown">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M12 3v12M7 10l5 5 5-5" />
-                                            <path d="M5 21h14" />
-                                        </svg>
-                                        Export
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end export-menu">
-                                        <?php
-                                            $queryParams = request()->all();
-                                        ?>
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="<?php echo e(route('publisher.export-advertisers', array_merge(['type' => 'csv'], $queryParams))); ?>">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                                    <path d="M14 2v6h6" />
-                                                </svg>
-                                                <span><strong>Export as CSV</strong><span class="hint">Plain text, opens
-                                                        anywhere</span></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="<?php echo e(route('publisher.export-advertisers', array_merge(['type' => 'xlsx'], $queryParams))); ?>">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                                    <path d="M14 2v6h6" />
-                                                    <path d="M8 14h8M8 18h5" />
-                                                </svg>
-                                                <span><strong>Export as Excel</strong><span class="hint">.xlsx with
-                                                        formatting</span></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div class="apply-modal-tags">
+                            <span class="badge-soft amber" id="advertiserCommission">12% CPA</span>
+                            <span class="badge-soft slate" id="advertiserRegion">North America</span>
                         </div>
-                        <div class="tab-content mt-25" id="ap-tabContent">
-                            <?php echo $__env->make("template.publisher.widgets.loader-3", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                            <div class="tab-pane fade show active" id="ap-overview" role="tabpanel"
-                                aria-labelledby="ap-overview-tab">
-                                
-                            </div>
-                        </div>
-                    </div><!-- End: .columns-2 -->
+
+                        <p class="apply-modal-brief">Optional: Tell us about your promotional methods and general
+                            marketing plan for this merchant to help speed up approval. (Websites you'll use, PPC terms,
+                            etc.)</p>
+                        <textarea class="form-control w-100" rows="4" cols="4" name="message"
+                            placeholder="Websites, traffic sources, PPC terms, social media, etc..."></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="applyAdvertiserBttn" class="btn btn-amber btn-sm">Apply</button>
+                        <button type="button" class="btn btn-outline btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-
-
-        <!-- .atbd-drawer -->
-        <div class="drawer-basic-wrap right account">
-            <div class="atbd-drawer drawer-account d-none">
-                <div class="atbd-drawer__header d-flex aling-items-center justify-content-between">
-                    <h6 class="drawer-title">Send Message To The Advertiser</h6>
-                    <a href="#" class="btdrawer-close"><i class="la la-times"></i></a>
-                </div><!-- ends: .atbd-drawer__header -->
-                <div class="atbd-drawer__body">
-                    <div class="drawer-content">
-                        <div class="drawer-account-form form-basic">
-                            <form action="<?php echo e(route("publisher.send-msg-to-advertiser")); ?>" method="POST">
-                                <?php echo csrf_field(); ?>
-                                <input type="hidden" name="advertiser_id" id="advertiser_id">
-
-                                <div class="form-row">
-                                    <div class="form-group col-lg-6">
-                                        <label for="username">From</label>
-                                        <input type="text" name="publisher_name" id="publisher_name"
-                                            class="form-control form-control-sm" placeholder="Publisher Name"
-                                            value="<?php echo e(auth()->user()->first_name); ?> <?php echo e(auth()->user()->last_name); ?>"
-                                            readonly>
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <label for="to">To</label>
-                                        <input type="text" name="advertiser_name" id="advertiser_name"
-                                            class="form-control form-control-sm" placeholder="Advertiser Name" readonly>
-                                    </div>
-                                    <div class="form-group col-lg-12">
-                                        <label for="subject">Subject</label>
-                                        <input type="text" name="subject" id="subject" class="form-control form-control-sm"
-                                            placeholder="Please Enter Subject For This Message">
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <label for="question_or_comment">Your Question or Comments</label>
-                                        <textarea name="question_or_comment" id="question_or_comment"
-                                            class="form-control form-control-sm"
-                                            placeholder="Please Enter Your Question or Comments"></textarea>
-                                    </div>
-                                    <button class="btn btn-primary btn-default btn-squared ">Send Message</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div><!-- ends: .atbd-drawer__body -->
-            </div>
-        </div>
-        <!-- ends: .atbd-drawer -->
-
-        <!-- ============ APPLY TO PROGRAM MODAL ============ -->
-        <div class="modal-basic modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-                <form action="q" method="POST" id="applyAdvertiser">
-                    <?php echo csrf_field(); ?>
-                    <input type="hidden" id="a_id" name="a_id">
-                    <input type="hidden" id="a_name" name="a_name">
-                    <div class="modal-content modal-bg-white">
-                        <div class="modal-header">
-                            <h6 class="modal-title">Apply To Program</h6>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <h6 class="apply-modal-name" id="advertiserName"></h6>
-                            <p class="apply-modal-id" id="advertiserID"></p>
-
-                            <div class="apply-modal-tags">
-                                <span class="badge-soft amber" id="advertiserCommission">12% CPA</span>
-                                <span class="badge-soft slate" id="advertiserRegion">North America</span>
-                            </div>
-
-                            <p class="apply-modal-brief">Optional: Tell us about your promotional methods and general
-                                marketing plan for this merchant to help speed up approval. (Websites you'll use, PPC terms,
-                                etc.)</p>
-                            <textarea class="form-control w-100" rows="4" cols="4" name="message"
-                                placeholder="Websites, traffic sources, PPC terms, social media, etc..."></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" id="applyAdvertiserBttn" class="btn btn-amber btn-sm">Apply</button>
-                            <button type="button" class="btn btn-outline btn-sm" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
     </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make("layouts.publisher.publisher_panel", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\pub.affishare.com\resources\views/template/publisher/advertisers/find.blade.php ENDPATH**/ ?>

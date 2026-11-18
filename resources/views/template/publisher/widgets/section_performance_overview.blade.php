@@ -34,21 +34,19 @@
 
                 <div class="col-md-12 performance-stats-container">
                     <div class="nav nav-tabs performance-tabs border-0 mb-4 mt-2">
-
                         <div class="row g-2 mb-3" id="performanceTab" role="tablist">
-
                             <div class="col-md-6">
-                                <button class="perf-tab active" id="commission-tab" data-bs-toggle="tab"
+                                <button class="nav-tab active" id="commission-tab" data-bs-toggle="tab"
                                     data-bs-target="#commission" type="button" role="tab" aria-controls="commission"
                                     aria-selected="true">
-                                    <span class="perf-tab-icon teal">
+                                    <span class="nav-tab-icon teal">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M3 17l6-6 4 4 8-8" />
                                             <path d="M17 7h4v4" />
                                         </svg>
                                     </span>
-                                    <span class="perf-tab-copy">
+                                    <span class="nav-tab-copy">
                                         <span class="l">Total Revenue</span>
                                         <span class="v">
                                             {{ $performanceOverview['commission']['count'] ?? 0 }}
@@ -63,17 +61,18 @@
                                         </span>
                                 </button>
                             </div>
+
                             <div class="col-md-6">
-                                <button class="perf-tab" id="approved-commission-tab" data-bs-toggle="tab"
+                                <button class="nav-tab" id="approved-commission-tab" data-bs-toggle="tab"
                                     data-bs-target="#approvedcommission" type="button" role="tab"
                                     aria-controls="approvedcommission" aria-selected="false">
-                                    <span class="perf-tab-icon teal-solid">
+                                    <span class="nav-tab-icon teal-solid">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <circle cx="12" cy="12" r="9" />
                                             <path d="M8 12l3 3 5-6" />
                                         </svg>
                                     </span>
-                                    <span class="perf-tab-copy">
+                                    <span class="nav-tab-copy">
                                         <span class="l">Approved Revenue</span>
                                         <span class="v">
                                             {{ $performanceOverview['approved']['count'] ?? 0 }}
@@ -88,17 +87,18 @@
                                         </span>
                                 </button>
                             </div>
+                            
                             <div class="col-md-6">
-                                <button class="perf-tab" id="pending-commission-tab" data-bs-toggle="tab"
+                                <button class="nav-tab" id="pending-commission-tab" data-bs-toggle="tab"
                                     data-bs-target="#pendingcommission" type="button" role="tab"
                                     aria-controls="pendingcommission" aria-selected="false">
-                                    <span class="perf-tab-icon amber">
+                                    <span class="nav-tab-icon amber">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <circle cx="12" cy="12" r="9" />
                                             <path d="M12 7v5l3 3" />
                                         </svg>
                                     </span>
-                                    <span class="perf-tab-copy">
+                                    <span class="nav-tab-copy">
                                         <span class="l">Awaiting Revenue</span>
                                         <span class="v">
                                             {{ $performanceOverview['pending']['count'] ?? 0 }}
@@ -113,17 +113,18 @@
                                         </span>
                                 </button>
                             </div>
+                            
                             <div class="col-md-6">
-                                <button class="perf-tab" id="declined-commission-tab" data-bs-toggle="tab"
+                                <button class="nav-tab" id="declined-commission-tab" data-bs-toggle="tab"
                                     data-bs-target="#declinedcommission" type="button" role="tab"
                                     aria-controls="declinedcommission" aria-selected="false">
-                                    <span class="perf-tab-icon coral">
+                                    <span class="nav-tab-icon coral">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <circle cx="12" cy="12" r="9" />
                                             <path d="m9.5 9.5 5 5m0-5-5 5" />
                                         </svg>
                                     </span>
-                                    <span class="perf-tab-copy">
+                                    <span class="nav-tab-copy">
                                         <span class="l">Rejected Revenue</span>
                                         <span class="v">
                                             {{ $performanceOverview['declined']['count'] ?? 0 }}
@@ -138,17 +139,18 @@
                                         </span>
                                 </button>
                             </div>
+                            
                             <div class="col-md-6">
-                                <button class="perf-tab" id="transaction-tab" data-bs-toggle="tab"
+                                <button class="nav-tab" id="transaction-tab" data-bs-toggle="tab"
                                     data-bs-target="#transaction" type="button" role="tab" aria-controls="transaction"
                                     aria-selected="false">
-                                    <span class="perf-tab-icon ink">
+                                    <span class="nav-tab-icon ink">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M4 4h16l-6 8v6l-4 2v-8z" />
                                         </svg>
                                     </span>
-                                    <span class="perf-tab-copy">
+                                    <span class="nav-tab-copy">
                                         <span class="l">Total Conversions</span>
                                         <span class="v">
                                             {{ $performanceOverview['transaction']['count'] ?? 0 }}
@@ -163,10 +165,11 @@
                                         </span>
                                 </button>
                             </div>
+                            
                             <div class="col-md-6">
-                                <button class="perf-tab" id="sale-tab" data-bs-toggle="tab" data-bs-target="#sale"
+                                <button class="nav-tab" id="sale-tab" data-bs-toggle="tab" data-bs-target="#sale"
                                     type="button" role="tab" aria-controls="sale" aria-selected="false">
-                                    <span class="perf-tab-icon amber-solid">
+                                    <span class="nav-tab-icon amber-solid">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="9" cy="21" r="1" />
@@ -174,7 +177,7 @@
                                             <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" />
                                         </svg>
                                     </span>
-                                    <span class="perf-tab-copy">
+                                    <span class="nav-tab-copy">
                                         <span class="l">Total Sales</span>
                                         <span class="v">
                                             {{ $performanceOverview['sale']['count'] ?? 0 }}
@@ -194,7 +197,6 @@
                 </div>
 
                 <div class="tab-content" id="performanceTabContent">
-
                     <div class="tab-pane fade show active" id="commission" role="tabpanel" ria-labelledby="commission-tab">
                         <h3 class="chart-pane-title">Total Revenue Data</h3>
                         <div style="height:240px;" id="commissionChartContent"><canvas id="commissionChart"></canvas></div>
@@ -251,11 +253,7 @@
                             <li><span class="dot" style="background:#F2A93B;"></span>Previous Period</li>
                         </ul>
                     </div>
-
                 </div>
-
-
-
             </div>
         </div>
 

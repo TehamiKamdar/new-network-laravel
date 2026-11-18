@@ -1,33 +1,20 @@
 <div class="card card-pad" id="ap-tabContent">
     <!-- Start Table Responsive -->
     <div class="table-responsive">
-        <table class="table mb-0">
-            <thead>
+        <table class="table align-middle table-nowrap table-hover mb-0">
+            <thead class="table-light">
                 <tr class="userDatatable-header">
-                    <th>
-                        <span class="userDatatable-title">Transaction ID</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Brand</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Transaction Date</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Sale Amount</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Revenue</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Last Revenue</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Status</span>
-                    </th>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Transaction Date</th>
+                    <th scope="col">Sale Amount</th>
+                    <th scope="col">Revenue</th>
+                    <th scope="col">Last Revenue</th>
+                    <th scope="col">Status</th>
                 </tr>
             </thead>
             <tbody>
+                @if(count($transactions) > 0)
                 <tr class="userDatatable-header">
                     <th>
                     </th>
@@ -48,6 +35,7 @@
 
                     </th>
                 </tr>
+                @endif
 
                 @if(count($transactions))
                     @foreach($transactions as $key => $transaction)

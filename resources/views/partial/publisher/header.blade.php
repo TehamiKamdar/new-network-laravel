@@ -69,7 +69,7 @@
                         aria-haspopup="true" aria-expanded="false">
                         <i class='bx bx-bell fs-22'></i>
                         <span
-                            class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">3<span
+                            class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">{{ $notificationsCount }}<span
                                 class="visually-hidden">unread messages</span></span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
@@ -383,15 +383,14 @@
                             <img class="rounded-circle header-profile-user" src="{{ asset("assets/images/users/avatar-1.jpg")}}"
                                 alt="Header Avatar">
                             <span class="text-start ms-xl-2">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna
-                                    Adame</span>
-                                <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Founder</span>
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</span>
+                                <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">({{ auth()->user()->sid }})</span>
                             </span>
                         </span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
-                        <h6 class="dropdown-header">Welcome Anna!</h6>
+                        <h6 class="dropdown-header">Welcome {{ auth()->user()->first_name }}!</h6>
                         <a class="dropdown-item" href="pages-profile.html"><i
                                 class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Profile</span></a>
@@ -487,7 +486,7 @@
             <span class="d-flex align-items-center gap-2">
                 <img class="rounded header-profile-user" src="{{asset("assets/images/users/avatar-1.jpg")}}" alt="Header Avatar">
                 <span class="text-start">
-                    <span class="d-block fw-medium sidebar-user-name-text">Anna Adame</span>
+                    <span class="d-block fw-medium sidebar-user-name-text">{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</span>
                     <span class="d-block fs-14 sidebar-user-name-sub-text"><i
                             class="ri ri-circle-fill fs-10 text-success align-baseline"></i> <span
                             class="align-middle">Online</span></span>
@@ -496,7 +495,7 @@
         </button>
         <div class="dropdown-menu dropdown-menu-end">
             <!-- item-->
-            <h6 class="dropdown-header">Welcome Anna!</h6>
+            <h6 class="dropdown-header">Welcome {{ auth()->user()->first_name }}!</h6>
             <a class="dropdown-item" href="pages-profile.html"><i
                     class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                     class="align-middle">Profile</span></a>

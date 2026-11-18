@@ -36,6 +36,7 @@ Route::group(['middleware' => 'publisher.status', 'prefix' => 'partner', 'as' =>
    
 
     Route::get('/all-brands', [AdvertiserController::class, 'actionFindAdvertiser'])->name('find-advertisers');
+    Route::get('/brand-details/{id}', [AdvertiserController::class, 'actionBrandDetails'])->name('brand-details');
     Route::get('/brand-analytics', [AdvertiserController::class, 'actionBrandAnalytics'])->name('brand-analytics');
     Route::get('/brand-finder', [AdvertiserController::class, 'actionBrandFinder'])->name('brand-finder');
     Route::get('/advertiser-types', [AdvertiserController::class, 'actionAdvertiserTypes'])->name('advertiser-types');

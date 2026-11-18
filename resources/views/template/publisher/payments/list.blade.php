@@ -279,13 +279,34 @@
 @endpushonce
 
 @section("content")                
-    <div class="col-12 px-0">
-        @include("partial.admin.alert")
+    <div class="container-fluid">
 
-        <div id="ap-overview">
-            @include("template.publisher.widgets.loader")
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                    <h4 class="mb-sm-0">Payments</h4>
 
-            @include("template.publisher.payments.list_view", compact('payments'))
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Menu</a></li>
+                            <li class="breadcrumb-item active">Payments</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12 px-0">
+                @include("partial.admin.alert")
+    
+                <div id="ap-overview">
+                    @include("template.publisher.widgets.loader")
+    
+                    @include("template.publisher.payments.list_view", compact('payments'))
+                </div>
+            </div>
         </div>
+        <!-- end page title -->
+        
     </div>
 @endsection

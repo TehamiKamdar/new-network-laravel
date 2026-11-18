@@ -121,14 +121,13 @@
                             </td>
                             <td>
                                 <ul class="list-inline hstack gap-2 mb-0">
-                                    <li class="list-inline-item edit {{ $status }}" title="Visit Website">
-                                        <a href="{{ $advertiser->click_through_url }}" class="text-muted d-inline-block">
-                                            <i class="ri-global-line fs-16"></i>
+                                    <li class="list-inline-item {{ $status }}" title="View Details">
+                                        <a href="javascript:void(0);" 
+                                        class="view-item-btn" 
+                                        onclick="viewBrandDetails('{{ route('publisher.brand-details', $advertiser->id) }}')"
+                                        >
+                                            <i class="ri-eye-fill align-bottom text-muted"></i>
                                         </a>
-                                    </li>
-                                    <li class="list-inline-item {{ $status }}" title="View">
-                                        <a href="javascript:void(0);" class="view-item-btn"><i
-                                                class="ri-eye-fill align-bottom text-muted"></i></a>
                                     </li>
                                     
                                     @php
@@ -140,17 +139,24 @@
                                             $status = $advertiser->advertiser_applies_status;
                                         }
                                     @endphp
-                                    @if($status && $status != \App\Models\AdvertiserApply::STATUS_ACTIVE)
-                                    <li class="list-inline-item {{ $status }}" title="Apply">
-                                        <a class="remove-item-btn"
-                                            @if($advertisers instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                                            onclick="openApplyModal('{{ $advertiser->sid }}', '{{ $advertiser->name }}', '{{ $advertiser->average_payment_time }}', '{{ $regions }}')" @else onclick="window.location.href='{{ route("publisher.view-advertiser", ['sid' =>  $advertiser->sid]) }}'"
-                                            @endif
-                                            data-bs-toggle="modal"
-                                            href="#deleteRecordModal">
-                                            <i class="ri-user-add-fill align-bottom text-muted"></i>
-                                        </a>
-                                    </li>
+                                    @if(!$status)
+                                        <li class="list-inline-item {{ $status }}" title="Apply">
+                                            <a class="remove-item-btn"
+                                                @if($advertisers instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                                    onclick="openApplyModal(
+                                                        '{{ $advertiser->sid }}',
+                                                        '{{ $advertiser->name }}',
+                                                        '{{ $advertiser->average_payment_time }}',
+                                                        '{{ $regions }}'
+                                                    )"
+                                                @else
+                                                    onclick="window.location.href='{{ route('publisher.view-advertiser', ['sid' => $advertiser->sid]) }}'"
+                                                @endif
+                                                data-bs-toggle="modal" data-bs-target="#modal-basic">
+
+                                                <i class="ri-user-add-fill align-bottom text-muted"></i>
+                                            </a>
+                                        </li>
                                     @endif
                                 </ul>
                             </td>

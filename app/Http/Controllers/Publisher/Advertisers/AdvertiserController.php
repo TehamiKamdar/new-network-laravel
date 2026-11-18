@@ -17,6 +17,7 @@ use App\Service\Publisher\Advertiser\SearchService;
 use App\Service\Publisher\Advertiser\SendMsgService;
 use App\Service\Publisher\Advertiser\TypeService;
 use App\Service\Publisher\Advertiser\ViewService;
+use App\Service\Publisher\Advertiser\DetailService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -54,6 +55,11 @@ class AdvertiserController extends Controller
     public function actionAdvertiserTypes(Request $request, TypeService $service): View|Factory|RedirectResponse|Application|JsonResponse
     {
         return $service->init($request);
+    }
+
+    public function actionBrandDetails($id, DetailService $service)
+    {
+        return $service->init($id);
     }
 
     public function actionBrandFinder(Request $request)

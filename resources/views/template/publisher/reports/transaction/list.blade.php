@@ -317,7 +317,149 @@
 @endpushonce
 
 @section("content")
-    <div class="row justify-content-between">
+
+    <div class="container-fluid">
+        
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                    <h4 class="mb-sm-0">Reports & Analytics</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Reports</a></li>
+                            <li class="breadcrumb-item active">Conversions</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center flex-wrap gap-2">
+                            <div class="flex-grow-1">
+                                <ul class="nav tab-pills flex-wrap gap-2" id="transactionStatus">
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ !request()->section || request()->section == 'all' ? 'active' : '' }}" data-section="all" href="javascript:void(0)" id="allTransactions">
+                                            All
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->section == 'pending' ? 'active' : '' }}" data-section="pending" href="javascript:void(0)" id="pendingTransactions">
+                                            Pending
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->section == 'hold' ? 'active' : '' }}" data-section="hold" href="javascript:void(0)" id="holdTransactions">
+                                            Hold
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->section == 'approved' ? 'active' : '' }}" data-section="approved" href="javascript:void(0)" id="approvedTransactions">
+                                            Approved
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->section == 'declined' ? 'active' : '' }}" data-section="declined" href="javascript:void(0)" id="declinedTransactions">
+                                            Declined
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->section == 'paid' ? 'active' : '' }}" data-section="paid" href="javascript:void(0)" id="paidTransactions">
+                                            Paid
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="flex-shrink-0">
+                                <div class="hstack text-nowrap gap-2">
+                                    <button class="btn btn-soft-danger material-shadow-none" id="remove-actions"
+                                        onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                                        <div class="form-check ps-0">
+                                            <select class="js-example-basic-single js-states form-select" id="region">
+                                                <option value="all" {{ request()->region == 'all' || empty(request()->region) ? 'selected' : '' }}>
+                                                    All Regions
+                                                </option>
+
+                                                @foreach($countries ?? [] as $country)
+                                                    @if($country->advertiser_country)
+                                                        <option value="{{ $country->advertiser_country }}"
+                                                            {{ request()->region == $country->advertiser_country ? 'selected' : '' }}>
+                                                            {{ $country->advertiser_country }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
+
+                                                <option value="unknown" {{ request()->region == 'unknown' ? 'selected' : '' }}>
+                                                    Unknown
+                                                </option>
+                                            </select>
+                                        </div>
+                                    <button class="btn btn-soft-success material-shadow-none" id="dropdownExport" data-bs-toggle="dropdown"
+                                    aria-expanded="false">Export</button>
+                                    <ul class="dropdown-menu export-menu" aria-labelledby="dropdownExport">
+                                        @php
+                                            $queryParams = request()->all();
+                                        @endphp
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{ $csv }}">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                    <path d="M14 2v6h6" />
+                                                </svg>
+                                                <span><strong>Export as CSV</strong><span class="hint">Plain text, opens
+                                                        anywhere</span></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{ $xslx }}">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                    <path d="M14 2v6h6" />
+                                                    <path d="M8 14h8M8 18h5" />
+                                                </svg>
+                                                <span><strong>Export as Excel</strong><span class="hint">.xlsx with
+                                                        formatting</span></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <button type="button" id="dropdownMenuLink1" data-bs-toggle="dropdown"
+                                        aria-expanded="false" class="btn btn-soft-info material-shadow-none"><i
+                                            class="ri-more-2-fill"></i></button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1" style="width: 250px; padding: 12px;">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control form-control-default date-ranger" name="date-ranger" placeholder="Jan 01, {{ now()->format("Y") }} - {{ now()->format("M d, Y") }}"/>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ap-overview">
+                @include("template.publisher.reports.transaction.list_view", compact('transactions'))
+            </div>
+        </div>
+    </div>
+
+    {{-- <div class="row justify-content-between">
         <div class="col-lg-3 col-md-4 col-sm-12">
             <div class="filter-card filter-sticky">
                 <!-- Header -->
@@ -513,6 +655,6 @@
             </div>
 
         </div><!-- End: .userDatatable -->
-    </div>
+    </div> --}}
 
 @endsection

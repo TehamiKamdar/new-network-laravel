@@ -2,36 +2,18 @@
 
     <!-- Start Table Responsive -->
     <div class="table-responsive">
-        <table class="table">
-            <thead>
+        <table class="table align-middle table-nowrap table-hover mb-0">
+            <thead class="table-light">
                 <tr class="userDatatable-header">
-                    <th>
-                        <span class="userDatatable-title">Invoice No#</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Invoice Created</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Payout ID</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Website</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Payout Method</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Amount</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Paid Amount</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Paid Date</span>
-                    </th>
-                    <th>
-                        <span class="userDatatable-title">Status</span>
-                    </th>
+                    <th scope="col">Invoice No#</th>
+                    <th scope="col">Invoice Created</th>
+                    <th scope="col">Payout ID</th>
+                    <th scope="col">Website</th>
+                    <th scope="col">Payout Method</th>
+                    <th scope="col">Paid Amount</th>
+                    <th scope="col">Paid Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -69,16 +51,6 @@
                             <td>
                                 <div class="orderDatatable-title">
                                     {{ ucwords($payment->payment_method->payment_method ?? "-") }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="orderDatatable-title">
-                                    ${{ number_format($payment->commission_amount, 2) ?? 0 }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="orderDatatable-title">
-                                    ${{ number_format($payment->commission_amount - $payment->lc_commission_amount, 2) ?? 0 }}
                                 </div>
                             </td>
                             <td>

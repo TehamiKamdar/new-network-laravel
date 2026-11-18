@@ -119,14 +119,13 @@
                             </td>
                             <td>
                                 <ul class="list-inline hstack gap-2 mb-0">
-                                    <li class="list-inline-item edit <?php echo e($status); ?>" title="Visit Website">
-                                        <a href="<?php echo e($advertiser->click_through_url); ?>" class="text-muted d-inline-block">
-                                            <i class="ri-global-line fs-16"></i>
+                                    <li class="list-inline-item <?php echo e($status); ?>" title="View Details">
+                                        <a href="javascript:void(0);" 
+                                        class="view-item-btn" 
+                                        onclick="viewBrandDetails('<?php echo e(route('publisher.brand-details', $advertiser->id)); ?>')"
+                                        >
+                                            <i class="ri-eye-fill align-bottom text-muted"></i>
                                         </a>
-                                    </li>
-                                    <li class="list-inline-item <?php echo e($status); ?>" title="View">
-                                        <a href="javascript:void(0);" class="view-item-btn"><i
-                                                class="ri-eye-fill align-bottom text-muted"></i></a>
                                     </li>
                                     
                                     <?php
@@ -138,17 +137,24 @@
                                             $status = $advertiser->advertiser_applies_status;
                                         }
                                     ?>
-                                    <?php if($status && $status != \App\Models\AdvertiserApply::STATUS_ACTIVE): ?>
-                                    <li class="list-inline-item <?php echo e($status); ?>" title="Apply">
-                                        <a class="remove-item-btn"
-                                            <?php if($advertisers instanceof \Illuminate\Pagination\LengthAwarePaginator): ?>
-                                            onclick="openApplyModal('<?php echo e($advertiser->sid); ?>', '<?php echo e($advertiser->name); ?>', '<?php echo e($advertiser->average_payment_time); ?>', '<?php echo e($regions); ?>')" <?php else: ?> onclick="window.location.href='<?php echo e(route("publisher.view-advertiser", ['sid' =>  $advertiser->sid])); ?>'"
-                                            <?php endif; ?>
-                                            data-bs-toggle="modal"
-                                            href="#deleteRecordModal">
-                                            <i class="ri-user-add-fill align-bottom text-muted"></i>
-                                        </a>
-                                    </li>
+                                    <?php if(!$status): ?>
+                                        <li class="list-inline-item <?php echo e($status); ?>" title="Apply">
+                                            <a class="remove-item-btn"
+                                                <?php if($advertisers instanceof \Illuminate\Pagination\LengthAwarePaginator): ?>
+                                                    onclick="openApplyModal(
+                                                        '<?php echo e($advertiser->sid); ?>',
+                                                        '<?php echo e($advertiser->name); ?>',
+                                                        '<?php echo e($advertiser->average_payment_time); ?>',
+                                                        '<?php echo e($regions); ?>'
+                                                    )"
+                                                <?php else: ?>
+                                                    onclick="window.location.href='<?php echo e(route('publisher.view-advertiser', ['sid' => $advertiser->sid])); ?>'"
+                                                <?php endif; ?>
+                                                data-bs-toggle="modal" data-bs-target="#modal-basic">
+
+                                                <i class="ri-user-add-fill align-bottom text-muted"></i>
+                                            </a>
+                                        </li>
                                     <?php endif; ?>
                                 </ul>
                             </td>

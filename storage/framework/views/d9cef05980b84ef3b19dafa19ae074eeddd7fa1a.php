@@ -1,6 +1,6 @@
 <?php $__env->startPush('title', 'All Conversions'); ?>
 
-<?php if (! $__env->hasRenderedOnce('0c146ab5-3bfb-487b-a060-c4039a7e8bb9')): $__env->markAsRenderedOnce('0c146ab5-3bfb-487b-a060-c4039a7e8bb9');
+<?php if (! $__env->hasRenderedOnce('4124c11a-ed60-4a60-98d0-9c82ddf1a47a')): $__env->markAsRenderedOnce('4124c11a-ed60-4a60-98d0-9c82ddf1a47a');
 $__env->startPush('styles'); ?>
     <link rel="stylesheet" href="<?php echo e(\App\Helper\Static\Methods::staticAsset("vendor_assets/css/daterangepicker.css")); ?>">
 
@@ -18,7 +18,7 @@ $__env->startPush('styles'); ?>
     </style>
     <?php $__env->stopPush(); endif; ?>
 
-<?php if (! $__env->hasRenderedOnce('25475f20-061c-429b-a4a6-5efd01d98d41')): $__env->markAsRenderedOnce('25475f20-061c-429b-a4a6-5efd01d98d41');
+<?php if (! $__env->hasRenderedOnce('63c50e8d-d3e8-4fc2-839f-d842d8c3fea9')): $__env->markAsRenderedOnce('63c50e8d-d3e8-4fc2-839f-d842d8c3fea9');
 $__env->startPush('scripts'); ?>
 
     <?php
@@ -317,204 +317,150 @@ $__env->startPush('scripts'); ?>
 <?php $__env->stopPush(); endif; ?>
 
 <?php $__env->startSection("content"); ?>
-    <div class="row justify-content-between">
-        <div class="col-lg-3 col-md-4 col-sm-12">
-            <div class="filter-card filter-sticky">
-                <!-- Header -->
-                <div class="fc-head">
-                    <h5>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 6h16M7 12h10M10 18h4" />
-                        </svg>
-                        Filters
-                    </h5>
-                </div>
 
-                <!-- Body -->
-                <div class="fc-body">
-                    <!-- Search Filter -->
-                    <div class="filter-group">
-                        <div class="fg-head">
-                            <span class="t">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="11" cy="11" r="7" />
-                                    <path d="m21 21-4.3-4.3" />
-                                </svg>
-                                Search
-                            </span>
-                            <a href="javascript:void(0)" id="clearSearchByName"
-                                onclick="clearFilter('clearSearchByName')"
-                                class="fg-clear <?php echo e(request()->search_by_name ? '' : 'd-none'); ?>">
-                                <i class="fas fa-times me-1"></i> Clear
-                            </a>
-                        </div>
+    <div class="container-fluid">
+        
 
-                        <div class="input-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="7" />
-                                <path d="m21 21-4.3-4.3" />
-                            </svg>
-                            <input type="text" class="form-control w-100"
-                                value="<?php echo e(request()->search_by_name); ?>" id="SearchByName"
-                                placeholder="Search by brand name…">
-                        </div>
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                    <h4 class="mb-sm-0">Reports & Analytics</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Reports</a></li>
+                            <li class="breadcrumb-item active">Conversions</li>
+                        </ol>
                     </div>
-
-                    <?php if(!request()->payment_id): ?>
-                        <div class="filter-group">
-                            <div>
-                                <div class="fg-head">
-                                    <span class="t">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <rect x="3" y="4" width="18" height="18" rx="2" />
-                                            <path d="M16 2v4M8 2v4M3 10h18" />
-                                        </svg>
-                                        Date
-                                    </span>
-                                </div>
-                                <div class="input-group">
-                                        <input type="text" class="form-control form-control-default date-ranger" name="date-ranger" placeholder="Jan 01, <?php echo e(now()->format("Y")); ?> - <?php echo e(now()->format("M d, Y")); ?>"/>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if(!request()->payment_id): ?>
-                        <div class="filter-group">
-                            <div class="fg-head">
-                                <span class="t">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="9" />
-                                        <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
-                                    </svg>
-                                    Region
-                                </span>
-                            </div>
-
-                            <div class="form-check ps-0">
-                                <select class="js-example-basic-single js-states form-select" id="region">
-                                    <option value="all" <?php echo e(request()->region == 'all' || empty(request()->region) ? 'selected' : ''); ?>>
-                                        All Regions
-                                    </option>
-
-                                    <?php $__currentLoopData = $countries ?? []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php if($country->advertiser_country): ?>
-                                            <option value="<?php echo e($country->advertiser_country); ?>"
-                                                <?php echo e(request()->region == $country->advertiser_country ? 'selected' : ''); ?>>
-                                                <?php echo e($country->advertiser_country); ?>
-
-                                            </option>
-                                        <?php endif; ?>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                                    <option value="unknown" <?php echo e(request()->region == 'unknown' ? 'selected' : ''); ?>>
-                                        Unknown
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-
-                    <?php endif; ?>
 
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 col-md-4 col-sm-12">
-            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
-                <ul class="nav tab-pills flex-wrap gap-2" id="transactionStatus">
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo e(!request()->section || request()->section == 'all' ? 'active' : ''); ?>" data-section="all" href="javascript:void(0)" id="allTransactions">
-                            All
-                        </a>
-                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo e(request()->section == 'pending' ? 'active' : ''); ?>" data-section="pending" href="javascript:void(0)" id="pendingTransactions">
-                            Pending
-                        </a>
-                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo e(request()->section == 'hold' ? 'active' : ''); ?>" data-section="hold" href="javascript:void(0)" id="holdTransactions">
-                            Hold
-                        </a>
-                    </li>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center flex-wrap gap-2">
+                            <div class="flex-grow-1">
+                                <ul class="nav tab-pills flex-wrap gap-2" id="transactionStatus">
+                                    <li class="nav-item">
+                                        <a class="nav-link <?php echo e(!request()->section || request()->section == 'all' ? 'active' : ''); ?>" data-section="all" href="javascript:void(0)" id="allTransactions">
+                                            All
+                                        </a>
+                                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo e(request()->section == 'approved' ? 'active' : ''); ?>" data-section="approved" href="javascript:void(0)" id="approvedTransactions">
-                            Approved
-                        </a>
-                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link <?php echo e(request()->section == 'pending' ? 'active' : ''); ?>" data-section="pending" href="javascript:void(0)" id="pendingTransactions">
+                                            Pending
+                                        </a>
+                                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo e(request()->section == 'declined' ? 'active' : ''); ?>" data-section="declined" href="javascript:void(0)" id="declinedTransactions">
-                            Declined
-                        </a>
-                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link <?php echo e(request()->section == 'hold' ? 'active' : ''); ?>" data-section="hold" href="javascript:void(0)" id="holdTransactions">
+                                            Hold
+                                        </a>
+                                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo e(request()->section == 'paid' ? 'active' : ''); ?>" data-section="paid" href="javascript:void(0)" id="paidTransactions">
-                            Paid
-                        </a>
-                    </li>
-                </ul>
-                <div class="d-flex align-items-center gap-2 flex-wrap">
-                    <span class="count-chip">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20.6 12 12 20.6 3.4 12 12 3.4z" />
-                        </svg>
-                        Total Conversions <span class="n" id="totalResults"><?php echo e($total); ?></span>
-                    </span>
+                                    <li class="nav-item">
+                                        <a class="nav-link <?php echo e(request()->section == 'approved' ? 'active' : ''); ?>" data-section="approved" href="javascript:void(0)" id="approvedTransactions">
+                                            Approved
+                                        </a>
+                                    </li>
 
-                    <div class="dropdown">
-                        <button class="btn btn-outline export-btn" data-bs-toggle="dropdown">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 3v12M7 10l5 5 5-5" />
-                                <path d="M5 21h14" />
-                            </svg>
-                            Export
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end export-menu">
-                            <?php
-                                $queryParams = request()->all();
-                            ?>
-                            <li>
-                                <a class="dropdown-item"
-                                    href="<?php echo e($csv); ?>">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                        <path d="M14 2v6h6" />
-                                    </svg>
-                                    <span><strong>Export as CSV</strong><span class="hint">Plain text, opens
-                                            anywhere</span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item"
-                                    href="<?php echo e($xslx); ?>">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                        <path d="M14 2v6h6" />
-                                        <path d="M8 14h8M8 18h5" />
-                                    </svg>
-                                    <span><strong>Export as Excel</strong><span class="hint">.xlsx with
-                                            formatting</span></span>
-                                </a>
-                            </li>
-                        </ul>
+                                    <li class="nav-item">
+                                        <a class="nav-link <?php echo e(request()->section == 'declined' ? 'active' : ''); ?>" data-section="declined" href="javascript:void(0)" id="declinedTransactions">
+                                            Declined
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link <?php echo e(request()->section == 'paid' ? 'active' : ''); ?>" data-section="paid" href="javascript:void(0)" id="paidTransactions">
+                                            Paid
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="flex-shrink-0">
+                                <div class="hstack text-nowrap gap-2">
+                                    <button class="btn btn-soft-danger material-shadow-none" id="remove-actions"
+                                        onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                                        <div class="form-check ps-0">
+                                            <select class="js-example-basic-single js-states form-select" id="region">
+                                                <option value="all" <?php echo e(request()->region == 'all' || empty(request()->region) ? 'selected' : ''); ?>>
+                                                    All Regions
+                                                </option>
+
+                                                <?php $__currentLoopData = $countries ?? []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if($country->advertiser_country): ?>
+                                                        <option value="<?php echo e($country->advertiser_country); ?>"
+                                                            <?php echo e(request()->region == $country->advertiser_country ? 'selected' : ''); ?>>
+                                                            <?php echo e($country->advertiser_country); ?>
+
+                                                        </option>
+                                                    <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                                <option value="unknown" <?php echo e(request()->region == 'unknown' ? 'selected' : ''); ?>>
+                                                    Unknown
+                                                </option>
+                                            </select>
+                                        </div>
+                                    <button class="btn btn-soft-success material-shadow-none" id="dropdownExport" data-bs-toggle="dropdown"
+                                    aria-expanded="false">Export</button>
+                                    <ul class="dropdown-menu export-menu" aria-labelledby="dropdownExport">
+                                        <?php
+                                            $queryParams = request()->all();
+                                        ?>
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="<?php echo e($csv); ?>">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                    <path d="M14 2v6h6" />
+                                                </svg>
+                                                <span><strong>Export as CSV</strong><span class="hint">Plain text, opens
+                                                        anywhere</span></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="<?php echo e($xslx); ?>">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                    <path d="M14 2v6h6" />
+                                                    <path d="M8 14h8M8 18h5" />
+                                                </svg>
+                                                <span><strong>Export as Excel</strong><span class="hint">.xlsx with
+                                                        formatting</span></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <button type="button" id="dropdownMenuLink1" data-bs-toggle="dropdown"
+                                        aria-expanded="false" class="btn btn-soft-info material-shadow-none"><i
+                                            class="ri-more-2-fill"></i></button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1" style="width: 250px; padding: 12px;">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control form-control-default date-ranger" name="date-ranger" placeholder="Jan 01, <?php echo e(now()->format("Y")); ?> - <?php echo e(now()->format("M d, Y")); ?>"/>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <?php echo $__env->make("partial.admin.alert", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-            <?php echo $__env->make("template.publisher.widgets.loader", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <div id="ap-overview">
                 <?php echo $__env->make("template.publisher.reports.transaction.list_view", compact('transactions'), \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
-
-        </div><!-- End: .userDatatable -->
+        </div>
     </div>
+
+    
 
 <?php $__env->stopSection(); ?>
 
