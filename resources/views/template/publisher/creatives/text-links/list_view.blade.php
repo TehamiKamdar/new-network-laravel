@@ -7,14 +7,13 @@
             <table class="table align-middle table-nowrap mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th data-sort="name" scope="col">Advertiser</th>
-                        <th data-sort="createBy" scope="col">Tracking Short Link</th>
-                        <th data-sort="apikey" scope="col">Tracking Link</th>
+                        <th scope="col">Advertiser</th>
+                        <th scope="col">Tracking Short Link</th>
+                        <th scope="col">Tracking Link</th>
+                        <th scope="col">Hits</th>
                     </tr>
                 </thead>
                 <tbody class="list">
-
-
                     @if(count($links))
                         @foreach($links as $key => $link)
                             <tr>
@@ -56,6 +55,7 @@
                                         </svg>
                                     </button>
                                 </td>
+                                <td>{{ $link->hits }}</td>
                             </tr>
 
                             <!-- End: tr -->

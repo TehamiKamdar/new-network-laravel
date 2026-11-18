@@ -7,14 +7,13 @@
             <table class="table align-middle table-nowrap mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th data-sort="name" scope="col">Advertiser</th>
-                        <th data-sort="createBy" scope="col">Tracking Short Link</th>
-                        <th data-sort="apikey" scope="col">Tracking Link</th>
+                        <th scope="col">Advertiser</th>
+                        <th scope="col">Tracking Short Link</th>
+                        <th scope="col">Tracking Link</th>
+                        <th scope="col">Hits</th>
                     </tr>
                 </thead>
                 <tbody class="list">
-
-
                     <?php if(count($links)): ?>
                         <?php $__currentLoopData = $links; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $link): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
@@ -57,6 +56,7 @@
                                         </svg>
                                     </button>
                                 </td>
+                                <td><?php echo e($link->hits); ?></td>
                             </tr>
 
                             <!-- End: tr -->

@@ -91,6 +91,7 @@ class DasboardService
                 'advertisers.average_payment_time',
                 'advertisers.sid',
                 'advertisers.name',
+                'advertisers.click_through_url',
                 'advertiser_applies.status as advertiser_applies_status',
             ])
             ->where('advertiser_applies.publisher_id', $userID)

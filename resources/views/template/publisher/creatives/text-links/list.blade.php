@@ -6,92 +6,90 @@
 
 @pushonce('styles')
 <style>
+    .copy-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background: #fff;
+        color: #64748b;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
 
-.copy-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    padding: 0;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    background: #fff;
-    color: #64748b;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
+    .copy-btn:hover {
+        background: #f1f5f9;
+        border-color: #cbd5e1;
+        color: #334155;
+    }
 
-.copy-btn:hover {
-    background: #f1f5f9;
-    border-color: #cbd5e1;
-    color: #334155;
-}
+    .copy-btn svg {
+        width: 17px;
+        height: 17px;
+        transition: all 0.2s ease;
+    }
 
-.copy-btn svg {
-    width: 17px;
-    height: 17px;
-    transition: all 0.2s ease;
-}
+    .copy-btn .icon-check {
+        display: none;
+    }
 
-.copy-btn .icon-check {
-    display: none;
-}
+    .copy-btn .tip {
+        position: absolute;
+        bottom: calc(100% + 9px);
+        left: 50%;
+        transform: translate(-50%, 4px);
+        padding: 5px 9px;
+        border-radius: 5px;
+        background: #0f172a;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s ease;
+        pointer-events: none;
+    }
 
-.copy-btn .tip {
-    position: absolute;
-    bottom: calc(100% + 9px);
-    left: 50%;
-    transform: translate(-50%, 4px);
-    padding: 5px 9px;
-    border-radius: 5px;
-    background: #0f172a;
-    color: #fff;
-    font-size: 11px;
-    font-weight: 600;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    pointer-events: none;
-}
+    .copy-btn .tip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 5px solid transparent;
+        border-top-color: #0f172a;
+    }
 
-.copy-btn .tip::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 5px solid transparent;
-    border-top-color: #0f172a;
-}
+    .copy-btn.copied {
+        background: #ecfdf5;
+        border-color: #a7f3d0;
+        color: #059669;
+    }
 
-.copy-btn.copied {
-    background: #ecfdf5;
-    border-color: #a7f3d0;
-    color: #059669;
-}
+    .copy-btn.copied .icon-copy {
+        display: none;
+    }
 
-.copy-btn.copied .icon-copy {
-    display: none;
-}
+    .copy-btn.copied .icon-check {
+        display: block;
+    }
 
-.copy-btn.copied .icon-check {
-    display: block;
-}
+    .copy-btn.copied .tip {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, 0);
+    }
 
-.copy-btn.copied .tip {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, 0);
-}
-
-.copy-btn:focus-visible {
-    outline: 3px solid rgba(59, 130, 246, 0.2);
-    outline-offset: 2px;
-}
-
+    .copy-btn:focus-visible {
+        outline: 3px solid rgba(59, 130, 246, 0.2);
+        outline-offset: 2px;
+    }
 </style>
 <script>
     function changeLimit() {
@@ -148,6 +146,7 @@
             type: 'GET',
             data: dataObj,
             beforeSend: function () {
+                $("#gridLoader3").removeClass("d-none");
             },
             success: function (response) {
                 $("#totalResults").html(response.total);
@@ -269,7 +268,7 @@
 
 @section("content")
 
-<div class="container-fluid">
+    <div class="container-fluid">
         <!-- start page title -->
         <div class="row">
             <div class="col-12">
@@ -295,7 +294,8 @@
                         <div class="d-flex align-items-center flex-wrap gap-2">
                             <div class="flex-grow-1">
                                 <div class="search-box">
-                                    <input type="text" class="form-control search" placeholder="Search for links..." value="{{ request()->search_by_name }}" id="SearchByName">
+                                    <input type="text" class="form-control search" placeholder="Search for links..."
+                                        value="{{ request()->search_by_name }}" id="SearchByName">
                                     <i class="ri-search-line search-icon"></i>
                                 </div>
                             </div>
@@ -308,20 +308,23 @@
 
                         </div>
                     </div>
-                    @include("template.publisher.creatives.text-links.list_view", compact('links'))
+                    <div id="ap-overview">
+                        @include("template.publisher.creatives.text-links.list_view", compact('links'))
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row justify-content-between">
+    {{-- <div class="row justify-content-between">
         <div class="col-lg-3 col-md-4 col-sm-12">
             <div class="filter-card filter-sticky">
                 <!-- Header -->
                 <div class="fc-head">
                     <h5>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 6h16M7 12h10M10 18h4"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M4 6h16M7 12h10M10 18h4" />
                         </svg>
                         Filter
                     </h5>
@@ -333,15 +336,24 @@
                     <div class="filter-group">
                         <div class="fg-head">
                             <span class="t">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="7" />
+                                    <path d="m21 21-4.3-4.3" />
+                                </svg>
                                 Search
                             </span>
-                            <a href="#" onclick="clearFilter('clearSearchByName')" class="fg-clear {{ request()->search_by_name ? '' : 'd-none' }}" id="clearSearchByName"><i class="fas fa-times me-1"></i> Clear</a>
+                            <a href="#" onclick="clearFilter('clearSearchByName')"
+                                class="fg-clear {{ request()->search_by_name ? '' : 'd-none' }}" id="clearSearchByName"><i
+                                    class="fas fa-times me-1"></i> Clear</a>
 
                         </div>
                         <div class="input-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-                            <input type="text" class="form-control" id="SearchByName" placeholder="Search by name..." value="{{ request()->search_by_name }}">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="7" />
+                                <path d="m21 21-4.3-4.3" />
+                            </svg>
+                            <input type="text" class="form-control" id="SearchByName" placeholder="Search by name..."
+                                value="{{ request()->search_by_name }}">
                         </div>
                         <small class="filter-hint">Matches the brand a link belongs to.</small>
                     </div>
@@ -401,12 +413,11 @@
             </div>
             <div class="tab-content mt-25" id="ap-tabContent">
                 @include("template.publisher.widgets.loader-3")
-                <div class="tab-pane fade show active" id="ap-overview" role="tabpanel"
-                    aria-labelledby="ap-overview-tab">
+                <div class="tab-pane fade show active" id="ap-overview" role="tabpanel" aria-labelledby="ap-overview-tab">
                     @include("template.publisher.creatives.text-links.list_view", compact('links'))
                 </div>
             </div>
         </div><!-- End: .columns-2 -->
-    </div>
+    </div> --}}
 
 @endsection

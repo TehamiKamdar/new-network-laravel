@@ -78,7 +78,23 @@
                                             <a href="<?php echo e(route("publisher.creatives.coupons.list")); ?>" class="nav-link"> Coupons </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="<?php echo e(route("publisher.creatives.text-links.list")); ?>" class="nav-link"> Text Links </a>
+                                            <a href="<?php echo e(route("publisher.creatives.text-links.list")); ?>" class="nav-link"> Affiliate Links </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#sidebarReports" class="nav-link" data-bs-toggle="collapse" role="button"
+                                    aria-expanded="false" aria-controls="sidebarEmail" data-key="t-email">
+                                    Reports & Analytics
+                                </a>
+                                <div class="collapse menu-dropdown" id="sidebarReports">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="<?php echo e(route("publisher.reports.performance-by-transactions.list")); ?>" class="nav-link"> Revenue Overview </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="<?php echo e(route("publisher.reports.transactions.list")); ?>" class="nav-link"> Conversion Reports </a>
                                         </li>
                                     </ul>
                                 </div>

@@ -32,7 +32,7 @@ class TextLinkController extends Controller
 
         if ($websites) {
 
-            $links = Tracking::select(["advertisers.name", "advertisers.sid", "advertisers.url", "trackings.tracking_url_short", "trackings.tracking_url_long", "trackings.sub_id"])
+            $links = Tracking::select(["advertisers.name", "advertisers.sid", "advertisers.url", "trackings.tracking_url_short", "trackings.tracking_url_long", "trackings.sub_id", "trackings.hits"])
                             ->join("advertisers", "advertisers.id", "trackings.advertiser_id")
                             ->where("trackings.publisher_id", auth()->user()->id)
                             ->where("trackings.website_id", auth()->user()->active_website_id)
