@@ -41,6 +41,10 @@
     <!-- custom Css-->
     <link href="<?php echo e(asset("assets/css/custom.min.css")); ?>" rel="stylesheet" type="text/css" />
     <style>
+        #logoutform{
+            cursor: pointer;
+        }
+
         /* Pagination Wrapper */
         .atbd-page {
             display: flex;

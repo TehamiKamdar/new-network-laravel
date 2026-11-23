@@ -37,6 +37,10 @@
     <!-- custom Css-->
     <link href="{{ asset("assets/css/custom.min.css")}}" rel="stylesheet" type="text/css" />
     <style>
+        #logoutform{
+            cursor: pointer;
+        }
+
         /* Pagination Wrapper */
         .atbd-page {
             display: flex;
