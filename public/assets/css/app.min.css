@@ -39,4 +39,70 @@
 .export-menu .dropdown-item svg {
   color: var(--teal-deep);
 }
+
+
+#modal-basic .modal-content {
+    overflow: hidden;
+}
+
+#modal-basic .apply-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 23px;
+}
+
+#modal-basic .apply-brand-card {
+    padding: 18px;
+    border: 1px solid #eee8df;
+    background: var(--vz-body-bg);
+    border-radius: 12px;
+}
+
+#modal-basic .apply-status {
+    font-size: 10px;
+    font-weight: 600;
+    color: #198754;
+    background: #e8f7ee;
+    padding: 5px 9px;
+    border-radius: 20px;
+}
+
+#modal-basic .apply-message {
+    resize: vertical;
+    min-height: 120px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+#modal-basic .apply-message:focus {
+    border-color: #d9a04e;
+    box-shadow: 0 0 0 3px rgba(217, 160, 78, .12);
+}
+
+#modal-basic .btn-amber {
+    background: #d69b4d;
+    color: #fff;
+    border: 1px solid #d69b4d;
+    font-weight: 600;
+}
+
+#modal-basic .btn-amber:hover {
+    background: #bd8439;
+    border-color: #bd8439;
+    color: #fff;
+}
+
+#modal-basic .fs-11 {
+    font-size: 11px;
+}
+
+#modal-basic .fs-12 {
+    font-size: 12px;
+}
+
 /*# sourceMappingURL=app.min.css.map */

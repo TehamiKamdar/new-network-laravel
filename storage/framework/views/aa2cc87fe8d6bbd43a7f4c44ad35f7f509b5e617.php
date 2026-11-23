@@ -86,7 +86,7 @@
                                     <?php if($status && $status == \App\Models\AdvertiserApply::STATUS_PENDING): ?>
 
                                         <span class="badge bg-warning-subtle text-warning text-uppercase" disabled>
-                                            <i class="fas fa-clock color-white me-2"></i> Pending
+                                            <i class="fas fa-circle-exclamation color-white me-2"></i> Pending
                                         </span>
 
                                     <?php elseif($status && $status == \App\Models\AdvertiserApply::STATUS_ACTIVE): ?>
@@ -111,14 +111,14 @@
 
                                         <span class="badge bg-warning-subtle text-warning text-uppercase">
                                             
-                                            <span class="fas fa-stop-circle follow-icon me-2"></span> Not Applied
+                                            <span class="fas fa-stop-circle follow-icon me-2"></span> Not Joined
                                         </span>
 
                                     <?php endif; ?>
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <ul class="list-inline hstack gap-2 mb-0">
+                                <ul class="list-inline justify-content-center hstack gap-2 mb-0">
                                     <li class="list-inline-item <?php echo e($status); ?>" title="View Details">
                                         <a href="javascript:void(0);" 
                                         class="view-item-btn" 
@@ -128,34 +128,7 @@
                                         </a>
                                     </li>
                                     
-                                    <?php
-                                        $status = null;
-                                        if (isset($advertiser->advertiser_applies->status)) {
-                                            $status = $advertiser->advertiser_applies->status;
-                                            
-                                        } elseif (isset($advertiser->advertiser_applies_status)) {
-                                            $status = $advertiser->advertiser_applies_status;
-                                        }
-                                    ?>
-                                    <?php if(!$status): ?>
-                                        <li class="list-inline-item <?php echo e($status); ?>" title="Apply">
-                                            <a class="remove-item-btn"
-                                                <?php if($advertisers instanceof \Illuminate\Pagination\LengthAwarePaginator): ?>
-                                                    onclick="openApplyModal(
-                                                        '<?php echo e($advertiser->sid); ?>',
-                                                        '<?php echo e($advertiser->name); ?>',
-                                                        '<?php echo e($advertiser->average_payment_time); ?>',
-                                                        '<?php echo e($regions); ?>'
-                                                    )"
-                                                <?php else: ?>
-                                                    onclick="window.location.href='<?php echo e(route('publisher.view-advertiser', ['sid' => $advertiser->sid])); ?>'"
-                                                <?php endif; ?>
-                                                data-bs-toggle="modal" data-bs-target="#modal-basic">
-
-                                                <i class="ri-user-add-fill align-bottom text-muted"></i>
-                                            </a>
-                                        </li>
-                                    <?php endif; ?>
+                                    
                                 </ul>
                             </td>
                         </tr>
@@ -163,7 +136,7 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="5">
+                        <td colspan="6">
                             <h6 class="text-center"><?php echo e(ucfirst(request('section', 'All'))); ?> Brands Records are not available.</h6>
                         </td>
                     </tr>

@@ -8,7 +8,7 @@ class DetailService{
 
     public function init($id)
     {
-        $brand = Advertiser::findOrFail($id);
+        $brand = Advertiser::with('advertiser_applies')->findOrFail($id);
     
         return response()->json([
             "success" => true,

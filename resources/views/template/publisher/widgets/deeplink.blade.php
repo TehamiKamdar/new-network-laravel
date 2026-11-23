@@ -23,7 +23,7 @@
             <div class="row mt-2">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <select class="form-control w-100" id="widgetAdvertiser" name="widgetAdvertiser" required>
+                        <select class="form-control w-100" id="widgetAdvertiser" name="widgetAdvertiser" required disabled>
                             <option value="" selected disabled>Please Select</option>
                             @foreach(\App\Helper\PublisherData::getAdvertiserList() as $advertiserList)
                                 <option value="{{ $advertiserList['sid'] }}" @if(isset($advertiser->sid) && $advertiser->sid === $advertiserList['sid']) selected @endif

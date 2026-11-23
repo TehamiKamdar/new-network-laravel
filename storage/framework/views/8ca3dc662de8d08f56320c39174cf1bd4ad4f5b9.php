@@ -1,4 +1,4 @@
-<?php if (! $__env->hasRenderedOnce('64ce6a82-9dd7-48cb-9bd9-4b0da04cb4a9')): $__env->markAsRenderedOnce('64ce6a82-9dd7-48cb-9bd9-4b0da04cb4a9');
+<?php if (! $__env->hasRenderedOnce('d6051d3a-4a72-400b-b1aa-5775c4a8f81b')): $__env->markAsRenderedOnce('d6051d3a-4a72-400b-b1aa-5775c4a8f81b');
 $__env->startPush('styles'); ?>
 
 <link rel="stylesheet" href="<?php echo e(\App\Helper\Static\Methods::staticAsset("vendor_assets/css/select2.min.css")); ?>" />
@@ -250,7 +250,7 @@ $__env->startPush('styles'); ?>
     Brands
 <?php $__env->stopPush(); ?>
 
-<?php if (! $__env->hasRenderedOnce('141b8917-5c67-449a-b8f2-7def19461f77')): $__env->markAsRenderedOnce('141b8917-5c67-449a-b8f2-7def19461f77');
+<?php if (! $__env->hasRenderedOnce('fd3918b5-9103-467c-a85b-2dc6d24f799b')): $__env->markAsRenderedOnce('fd3918b5-9103-467c-a85b-2dc6d24f799b');
 $__env->startPush('scripts'); ?>
 <script src="<?php echo e(\App\Helper\Static\Methods::staticAsset("vendor_assets/js/select2.full.min.js")); ?>"></script>
 <script src="<?php echo e(\App\Helper\Static\Methods::staticAsset("vendor_assets/js/drawer.js")); ?>"></script>
@@ -317,12 +317,6 @@ $__env->startPush('scripts'); ?>
                 $("#totalAdvertiser").html(response.total);
                 $("#ap-overview").html(response.html);
                 changeLimit();
-                const drawerTriggers = document.querySelectorAll(".drawer-trigger");
-                if (drawerTriggers) {
-                    drawerTriggers.forEach((drawerTrigger) =>
-                        drawerTrigger.addEventListener("click", openDrawer)
-                    );
-                }
             },
             error: function (response) {
 
@@ -412,10 +406,10 @@ $__env->startPush('scripts'); ?>
             }
         });
     }
-    function openApplyModal(id, name, commission, region) {
+    function openApplyModal(id, name, commission, type, region) {
         $("#advertiserID").html(`Brand ID: ${id}`)
         $("#advertiserName").html(name)
-        $("#advertiserCommission").html(`Commission: ${commission || 'N/A'}`)
+        $("#advertiserCommission").html(`Commission: ${commission || 'N/A'}${type}`)
         $("#advertiserRegion").html(`Region: ${region}`)
         $("#a_id").val(id)
         $("#a_name").val(name)
@@ -599,6 +593,9 @@ function viewBrandDetails(url) {
 
                 let brand = response.data;
                 let countries = brand.country_full_name ?? [];
+                let commissionSuffix = String(brand.commission ?? '').includes('%')
+                    ? ''
+                    : (brand.commission_type === 'percentage' ? '%' : (brand.commission_type ?? ''));
 
                 if (typeof countries === 'string') {
                     try {
@@ -612,7 +609,67 @@ function viewBrandDetails(url) {
                     ? (countries.length > 2 ? 'Multi' : countries.join(', '))
                     : countries;
 
-                
+                let status = response.data.advertiser_applies?.status;
+
+                let statusHtml = '';
+
+                if (status === 'joined') {
+                    statusHtml = `
+                        <li class="list-inline-item avatar-lg" style="height: 2rem;">
+                            <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-11 rounded">
+                                <i class="ri-check-line me-2 fs-14"></i> Joined
+                            </a>
+                        </li>
+                    `;
+                } else if (status === 'pending') {
+                    statusHtml = `
+                        <li class="list-inline-item avatar-lg" style="height: 2rem;">
+                            <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-11 rounded">
+                                <i class="fas fa-circle-exclamation me-2 fs-14"></i> Pending
+                            </a>
+                        </li>
+                    `;
+                } else if (status === 'hold') {
+                    statusHtml = `
+                        <li class="list-inline-item avatar-lg" style="height: 2rem;">
+                            <a href="javascript:void(0);" class="avatar-title bg-primary-subtle text-primary fs-11 rounded">
+                                <i class="fas fa-stop-circle me-2 fs-14"></i> Hold
+                            </a>
+                        </li>
+                    `;
+                } else if (status === 'rejected') {
+                    statusHtml = `
+                        <li class="list-inline-item avatar-lg" style="height: 2rem;">
+                            <a href="javascript:void(0);" class="avatar-title bg-danger-subtle text-danger fs-11 rounded">
+                                <i class="fas fa-times me-2 fs-14"></i> Rejected
+                            </a>
+                        </li>
+                    `;
+                } else {
+                    statusHtml = `
+                        <li class="list-inline-item avatar-lg" style="height: 2rem;">
+                            <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-11 rounded">
+                                <i class="fas fa-stop-circle me-2 fs-14"></i> Not Joined
+                            </a>
+                        </li>
+                        <li class="list-inline-item avatar-lg" style="height: 2rem;">
+                            <a href="javascript:void(0);"
+                            onclick="openApplyModal(
+                                '${ escapeHtml(brand.sid) }',
+                                '${ escapeHtml(brand.name) }',
+                                '${ escapeHtml(brand.commission) }',
+                                '${ escapeHtml(commissionSuffix) }',
+                                '${ escapeHtml(location) }'
+                            )" data-bs-toggle="modal" data-bs-target="#modal-basic" class="avatar-title bg-success-subtle text-success fs-11 rounded">
+                                <i class="ri-user-add-line me-2 fs-14"></i> Apply
+                            </a>
+                        </li>
+                    `;
+                }
+
+                let year = brand.created_at
+                    ? new Date(brand.created_at).getFullYear()
+                    : 'N/A';
 
                     
                 $('#company-view-detail').html(`
@@ -621,26 +678,12 @@ function viewBrandDetails(url) {
                     <p class="text-muted">(${escapeHtml(brand.sid ?? 'N/A')})</p>
 
                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-15 rounded">
-                                <i class="ri-global-line"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
-                                <i class="ri-mail-line"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-15 rounded">
-                                <i class="ri-question-answer-line"></i>
-                            </a>
-                        </li>
+                        ${statusHtml}
                     </ul>
                 </div>
                 <div class="card-body">
                     <h6 class="text-muted text-uppercase fw-semibold mb-3">Information</h6>
-                    <p class="text-muted mb-4">${escapeHtml(brand.short_description ?? 'N/A')}</p>
+                    <p class="text-muted mb-4">${escapeHtml(brand.short_description ?? 'Promote this brand to your audience and earn commissions on successful referrals. Explore the program details and start building a profitable partnership with us.')}</p>
                     <div class="table-responsive table-card">
                         <table class="table table-borderless mb-0">
                             <tbody>
@@ -668,7 +711,7 @@ function viewBrandDetails(url) {
                                 </tr>
                                 <tr>
                                     <td class="fw-medium" scope="row">Since</td>
-                                    <td>${escapeHtml(brand.created_at ?? 'N/A')}</td>
+                                    <td>${escapeHtml(year ?? 'N/A')}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -708,8 +751,8 @@ function escapeHtml(value) {
 
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">CRM</a></li>
-                            <li class="breadcrumb-item active">Companies</li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Menu</a></li>
+                            <li class="breadcrumb-item active">Brands</li>
                         </ol>
                     </div>
 
@@ -724,8 +767,64 @@ function escapeHtml(value) {
                     <div class="card-header">
                         <div class="d-flex align-items-center flex-wrap gap-2">
                             <div class="flex-grow-1">
-                                <button class="btn btn-info add-btn" data-bs-toggle="modal" data-bs-target="#showModal"><i
-                                        class="ri-add-fill me-1 align-bottom"></i> Add Company</button>
+                                <ul class="nav tab-pills" id="brandTabs" role="tablist">
+
+                                    <?php if(request()->route()->getName() != "publisher.own-advertisers"): ?>
+                                        <li class="nav-item">
+                                            <button
+                                                class="nav-link <?php echo e(!request()->section || request()->section == 'all' ? 'active' : ''); ?>"
+                                                id="allBrands" data-section="all" type="button" role="tab">
+                                                All
+                                            </button>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <button class="nav-link <?php echo e(request()->section == 'new' ? 'active' : ''); ?>"
+                                                id="newBrands" data-section="new" type="button" role="tab">
+                                                Latest
+                                            </button>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <button class="nav-link <?php echo e(request()->section == 'not-joined' ? 'active' : ''); ?>"
+                                                id="notJoinedBrands" data-section="not-joined" type="button" role="tab">
+                                                Not Joined
+                                            </button>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <button class="nav-link <?php echo e(request()->section == 'pending' ? 'active' : ''); ?>"
+                                                id="pendingBrands" data-section="pending" type="button" role="tab">
+                                                Pending
+                                            </button>
+                                        </li>
+                                    <?php endif; ?>
+
+                                    <?php if(request()->route()->getName() == "publisher.own-advertisers"): ?>
+                                        <li class="nav-item">
+                                            <button
+                                                class="nav-link <?php echo e(request()->section == 'joined' || empty(request()->section) ? 'active' : ''); ?>"
+                                                id="joinedBrands" data-section="joined" type="button" role="tab">
+                                                Joined
+                                            </button>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <button class="nav-link <?php echo e(request()->section == 'hold' ? 'active' : ''); ?>"
+                                                id="holdBrands" data-section="hold" type="button" role="tab">
+                                                Hold
+                                            </button>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <button class="nav-link <?php echo e(request()->section == 'rejected' ? 'active' : ''); ?>"
+                                                id="rejectedBrands" data-section="rejected" type="button" role="tab">
+                                                Rejected
+                                            </button>
+                                        </li>
+                                    <?php endif; ?>
+
+                                </ul>
                             </div>
                             <div class="flex-shrink-0">
                                 <div class="hstack text-nowrap gap-2">
@@ -835,36 +934,118 @@ function escapeHtml(value) {
 
 
     
-    <div class="modal-basic modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-            <form action="q" method="POST" id="applyAdvertiser">
+    
+    <div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <form action="<?php echo e(route('publisher.apply-advertiser')); ?>" method="POST" id="applyAdvertiser">
                 <?php echo csrf_field(); ?>
+
                 <input type="hidden" id="a_id" name="a_id">
                 <input type="hidden" id="a_name" name="a_name">
-                <div class="modal-content modal-bg-white">
-                    <div class="modal-header">
-                        <h6 class="modal-title">Apply To Program</h6>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h6 class="apply-modal-name" id="advertiserName"></h6>
-                        <p class="apply-modal-id" id="advertiserID"></p>
 
-                        <div class="apply-modal-tags">
-                            <span class="badge-soft amber" id="advertiserCommission">12% CPA</span>
-                            <span class="badge-soft slate" id="advertiserRegion">North America</span>
+                <div class="modal-content border-0 shadow-lg">
+
+                    <!-- Header -->
+                    <div class="modal-header border-0 pb-0 px-4 pt-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="apply-icon bg-success-subtle text-success">
+                                <i class="ri-shake-hands-line"></i>
+                            </div>
+                            <div>
+                                <h5 class="modal-title fw-bold mb-1">
+                                    Apply to Program
+                                </h5>
+                                <p class="text-muted mb-0 fs-12">
+                                    Submit your partnership application
+                                </p>
+                            </div>
                         </div>
 
-                        <p class="apply-modal-brief">Optional: Tell us about your promotional methods and general
-                            marketing plan for this merchant to help speed up approval. (Websites you'll use, PPC terms,
-                            etc.)</p>
-                        <textarea class="form-control w-100" rows="4" cols="4" name="message"
-                            placeholder="Websites, traffic sources, PPC terms, social media, etc..."></textarea>
+                        <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                        </button>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" id="applyAdvertiserBttn" class="btn btn-amber btn-sm">Apply</button>
-                        <button type="button" class="btn btn-outline btn-sm" data-bs-dismiss="modal">Cancel</button>
+
+                    <!-- Body -->
+                    <div class="modal-body px-4 py-4">
+
+                        <!-- Advertiser Info -->
+                        <div class="apply-brand-card mb-4">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="text-muted fs-11 fw-semibold text-uppercase">
+                                    You are applying to
+                                </span>
+
+                                <span class="badge bg-success-subtle text-success">
+                                    <i class="ri-checkbox-circle-fill me-1"></i>
+                                    New Application
+                                </span>
+                            </div>
+
+                            <h5 class="fw-bold mb-1" id="advertiserName">
+                                
+                            </h5>
+
+                            <p class="text-muted fs-12 mb-3" id="advertiserID"></p>
+
+                            <div class="apply-modal-tags d-flex flex-wrap gap-2">
+                                <span class="badge-soft amber" id="advertiserCommission">
+                                    
+                                </span>
+
+                                <span class="badge-soft slate" id="advertiserRegion">
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Marketing Message -->
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold mb-1">
+                                Marketing Strategy
+                                <span class="text-muted fw-normal">(Optional)</span>
+                            </label>
+
+                            <p class="text-muted fs-12 mb-3">
+                                Tell the advertiser how you plan to promote their brand.
+                                This can help speed up your approval.
+                            </p>
+
+                            <textarea
+                                class="form-control apply-message"
+                                rows="5"
+                                name="message"
+                                placeholder="Describe your promotional methods, websites, traffic sources, PPC keywords, social media channels, etc.">
+                            </textarea>
+
+                            <div class="d-flex align-items-center gap-2 mt-2">
+                                <i class="ri-information-line text-muted"></i>
+                                <span class="text-muted fs-11">
+                                    Providing details may improve your application.
+                                </span>
+                            </div>
+                        </div>
+
                     </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer border-0 px-4 pb-4 pt-0">
+                        <button type="button"
+                            class="btn btn-light px-4"
+                            data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+
+                        <button type="submit"
+                            id="applyAdvertiserBttn"
+                            class="btn bg-primary text-white px-4">
+                            <i class="ri-send-plane-fill me-1"></i>
+                            Submit Application
+                        </button>
+                    </div>
+
                 </div>
             </form>
         </div>

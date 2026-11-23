@@ -55,13 +55,14 @@ class OwnService extends BaseController
                                     'advertisers.sid',
                                     'advertisers.logo',
                                     'advertisers.name',
-                                     'advertisers.fetch_logo_url',
-                        'advertisers.is_fetchable_logo',
+                                    'advertisers.fetch_logo_url',
+                                    'advertisers.is_fetchable_logo',
                                     'advertisers.url',
                                     'advertisers.primary_regions',
                                     'advertisers.average_payment_time',
                                     'advertisers.commission',
                                     'advertisers.commission_type',
+                                    'advertisers.click_through_url',
                                     'advertiser_applies.status as advertiser_applies_status'
                                 ])
                                 ->join("advertiser_applies", "advertiser_applies.internal_advertiser_id", "advertisers.id");
