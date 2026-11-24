@@ -23,8 +23,6 @@ class DasboardService
 
     public function init(Request $request)
     {
-
-
         $user = auth()->user();
 
         $websites = Website::withAndWhereHas('users', function ($query) use ($user) {
@@ -99,7 +97,7 @@ class DasboardService
             ->where('advertisers.status', 1)
             ->orderBy('advertisers.created_at', 'DESC');
 
-        $advertisers = $advertisers->take(5)->get();
+        $advertisers = $advertisers->take(10)->get();
 
         $count = Advertiser::select('id')
             ->where('is_active', Advertiser::AVAILABLE)

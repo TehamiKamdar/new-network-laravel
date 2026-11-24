@@ -21281,10 +21281,6 @@ span.flatpickr-weekday {
     overflow: hidden
 }
 
-.card-body {
-    padding: calc(var(--vz-grid-gutter-width) + .5rem) 2rem 2rem
-}
-
 .step-heading {
     text-align: center;
     margin-bottom: 6px
@@ -21841,6 +21837,125 @@ select.control {
     accent-color: var(--vz-primary);
     width: 15px;
     height: 15px
+}
+.donut-wrap {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+}
+
+.donut-wrap canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.donut-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    text-align: center;
+}
+
+.donut-center .n {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--vz-heading-color, #212529);
+}
+
+.donut-center .l {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--vz-secondary-color, #878a99);
+}
+
+.status-detail-item {
+    padding: 10px 0;
+}
+
+.status-detail-item:not(:last-child) {
+    border-bottom: 1px solid var(--vz-border-color, #e9ebec);
+}
+
+.sdi-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.sdi-row .lbl {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--vz-body-color, #495057);
+}
+
+.sdi-row .val {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--vz-heading-color, #212529);
+    white-space: nowrap;
+}
+
+.sdi-row .pct {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--vz-secondary-color, #878a99);
+    margin-left: 5px;
+}
+
+.progress-thin {
+    width: 100%;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--vz-light, #f1f1f1);
+}
+
+.progress-thin span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    transition: width 0.4s ease;
+}
+
+/* Theme-based status colors */
+
+.progress-thin.c-teal span {
+    background: var(--vz-primary);
+}
+
+.progress-thin.c-coral span {
+    background: var(--vz-success);
+}
+
+.progress-thin.c-amber span {
+    background: var(--vz-danger);
+}
+
+.progress-thin.c-ink span {
+    background: var(--vz-warning);
+}
+
+.progress-thin.c-slate span {
+    background: var(--vz-dark);
+}
+
+@media (max-width: 767px) {
+    .donut-wrap {
+        width: 180px !important;
+        height: 180px !important;
+    }
+
+    .status-detail-item {
+        padding: 12px 0;
+    }
 }
 
 /*# sourceMappingURL=app.min.css.map */

@@ -41,128 +41,6 @@
             cursor: pointer;
         }
 
-        /* Pagination Wrapper */
-        .atbd-page {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        /* Pagination List */
-        .atbd-pagination {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            gap: 6px;
-        }
-
-        /* Pagination Item */
-        .atbd-pagination__item {
-            display: inline-flex;
-        }
-
-        /* Pagination Links */
-        .atbd-pagination__link {
-            min-width: 36px;
-            height: 36px;
-            padding: 0 12px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            border-radius: 6px;
-            border: 1px solid #e5e9f2;
-            color: var(--ink);
-            text-decoration: none;
-            background: #ffffff;
-            transition: all 0.2s ease;
-        }
-
-        /* Hover */
-        .atbd-pagination__link:hover {
-            background: #ff3838;
-            color: #ffffff;
-            border-color: #ff3838;
-        }
-
-        /* Active Page */
-        .atbd-pagination__link.active {
-            background: #ff3838;
-            color: #ffffff;
-            border-color: #ff3838;
-            cursor: default;
-        }
-
-        /* Disabled */
-        .atbd-pagination__item.disabled .atbd-pagination__link {
-            color: #c6d0dc;
-            border-color: #e5e9f2;
-            background: #f8f9fb;
-            cursor: not-allowed;
-        }
-
-        /* Prev / Next */
-        .pagination-control {
-            font-size: 18px;
-            line-height: 1;
-        }
-
-        /* Pagination Select Wrapper */
-        .paging-option {
-            display: flex;
-            align-items: center;
-        }
-
-        /* Page Selection Dropdown */
-        .page-selection {
-            height: 36px;
-            font-size: 14px;
-            color: var(--vz-primary);
-            font-weight: var(--vz-font-weight-medium);
-            padding: .375rem .75rem;
-            background-color: var(--vz-secondary-bg);
-            border: var(--vz-border-width) solid var(--vz-border-color);
-            border-radius: .25rem;
-            cursor: pointer;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-
-        /* Hover */
-        .page-selection:hover {
-            border-color: var(--vz-primary-text-emphasis);
-        }
-
-        /* Focus */
-        .page-selection:focus {
-            border-color: var(--vz-primary-text-emphasis);
-            box-shadow: 0 0 0 2px rgba(95, 99, 242, 0.15);
-        }
-
-        /* Disabled */
-        .page-selection:disabled {
-            background: #f8f9fb;
-            color: #c6d0dc;
-            cursor: not-allowed;
-        }
-
-        /* Align nicely inside pagination */
-        .atbd-pagination__item .page-selection {
-            margin-left: 8px;
-        }
-
-        @media (max-width: 576px) {
-            .atbd-pagination__link {
-                min-width: 32px;
-                height: 32px;
-                font-size: 13px;
-            }
-
-            .page-selection {
-                height: 32px;
-                font-size: 13px;
-            }
-        }
-
         .notification-wrapper {
             position: fixed;
             z-index: 9999;
@@ -172,50 +50,12 @@
             top: 20px;
             right: 20px;
         }
-
-        .atbd-notification-box {
-            background: #fff;
-            border-left: 4px solid #28a745;
-            padding: 15px 20px;
-            min-width: 300px;
-            border-radius: 6px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .notification-success {
-            border-color: #28a745;
-        }
-
-        .atbd-notification-box__icon {
-            margin-right: 12px;
-            color: #28a745;
-        }
-
-        .atbd-notification-box__text h6 {
-            margin: 0;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .atbd-notification-box__text p {
-            margin: 0;
-            font-size: 13px;
-            color: #666;
-        }
-
-        .atbd-notification-box__close {
-            margin-left: auto;
-            color: #999;
-            cursor: pointer;
-        }
     </style>
 </head>
 
 <body>
     <div id="layout-wrapper">
+        <div class="notification-wrapper top-right"></div>
         @include("partial.publisher.header")
 
         <div class="main-content">
@@ -1192,17 +1032,6 @@
         </div>
     </div>
 
-    {{-- <div class="notification-wrapper top-right"></div>
-
-    <div class="app-main">
-
-        <main class="app-content">
-        </main>
-    </div> --}}
-
-
-
-
     <!-- JAVASCRIPT -->
     <script src="{{ asset("assets/js/libs/jquery/jquery.min.js") }}"></script>
     <script src="{{ asset("publisher_dashboard/lib/jquery.flot/jquery.flot.js") }}"></script>
@@ -1227,16 +1056,11 @@
 
     <!-- Dashboard init -->
     <script src="{{ asset("assets/js/pages/dashboard-ecommerce.init.js")}}"></script>
-    <script
-        src="{{ \App\Helper\Static\Methods::staticAsset("publisher_dashboard/lib/peity/jquery.peity.min.js") }}"></script>
-
-    <script src="{{ \App\Helper\Static\Methods::staticAsset("publisher_dashboard/js/azia.js") }}"></script>
-    <script
-        src="{{ \App\Helper\Static\Methods::staticAsset("publisher_dashboard/js/chart.flot.sampledata.js") }}"></script>
-    <script
-        src="{{ \App\Helper\Static\Methods::staticAsset("publisher_dashboard/js/dashboard.sampledata.js") }}"></script>
-
-    <script src="{{ \App\Helper\Static\Methods::staticAsset("libs/toastr/build/toastr.min.js") }}"></script>
+    <script src="{{ asset("publisher_dashboard/lib/peity/jquery.peity.min.js") }}"></script>
+    <script src="{{ asset("publisher_dashboard/js/azia.js") }}"></script>
+    <script src="{{ asset("publisher_dashboard/js/chart.flot.sampledata.js") }}"></script>
+    <script src="{{ asset("publisher_dashboard/js/dashboard.sampledata.js") }}"></script>
+    <script src="{{ asset("libs/toastr/build/toastr.min.js") }}"></script>
 
     <!-- App js -->
     <script src="{{ asset("assets/js/app.js")}}"></script>

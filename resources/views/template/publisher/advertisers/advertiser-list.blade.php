@@ -2,7 +2,7 @@
     $checkAdmin = auth()->user()->getRoleName() != \App\Models\Role::ADMIN_ROLE
 @endphp
 
-    <div class="table-responsive table-card mb-3">
+    <div class="table-responsive mb-3">
         <table class="table align-middle table-nowrap table-hover mb-0" id="customerTable">
             <thead class="table-light">
                 <tr>
