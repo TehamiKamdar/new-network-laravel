@@ -12,4 +12,8 @@
     @include("auth.publisher_register.steps.four")
 
 @endif
-@yield("step_form_content")
+
+
+    <div class="card-body">
+        @yield("step_form_content")
+    </div>

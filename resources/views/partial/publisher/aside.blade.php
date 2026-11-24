@@ -14,7 +14,7 @@
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarBrands" data-bs-toggle="collapse" role="button"
                     aria-expanded="false" aria-controls="sidebarBrands">
-                    <i class="ri-apps-2-line"></i> <span data-key="t-apps">Brands Portfolio</span>
+                    <i class="ri-store-2-line"></i> <span data-key="t-apps">Brands Portfolio</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarBrands">
                     <ul class="nav nav-sm flex-column">
@@ -37,7 +37,7 @@
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarCreatives" data-bs-toggle="collapse" role="button"
                     aria-expanded="false" aria-controls="sidebarCreatives">
-                    <i class="ri-apps-2-line"></i> <span data-key="t-apps">Creative Offers</span>
+                    <i class="ri-coupon-3-line"></i> <span data-key="t-apps">Creative Offers</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarCreatives">
                     <ul class="nav nav-sm flex-column">
@@ -57,7 +57,7 @@
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarReports" data-bs-toggle="collapse" role="button"
                     aria-expanded="false" aria-controls="sidebarReports">
-                    <i class="ri-apps-2-line"></i> <span data-key="t-apps">Reports & Analytics</span>
+                    <i class="ri-bar-chart-grouped-line"></i> <span data-key="t-apps">Reports & Analytics</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarReports">
                     <ul class="nav nav-sm flex-column">

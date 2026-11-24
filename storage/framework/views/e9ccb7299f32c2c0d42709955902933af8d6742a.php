@@ -76,8 +76,6 @@
   } else {
     $declinedcolor = '#cc2500ff';
   }
-  $start_date = Carbon\Carbon::now()->startOfMonth()->format('Y-m-d');
-  $end_date = Carbon\Carbon::now()->endOfMonth()->format('Y-m-d');
 
   $transaction = $performanceOverview['transaction'] ?? [
     'dailyCurrentMonth' => [],
@@ -102,7 +100,7 @@
 
 ?>
 
-<?php if (! $__env->hasRenderedOnce('ffe2a2c3-97c6-443a-a800-e5dac3f97b96')): $__env->markAsRenderedOnce('ffe2a2c3-97c6-443a-a800-e5dac3f97b96');
+<?php if (! $__env->hasRenderedOnce('7370ffc6-c732-4818-baa7-03d11369176c')): $__env->markAsRenderedOnce('7370ffc6-c732-4818-baa7-03d11369176c');
 $__env->startPush('styles'); ?>
 <style>
   .legend div {
@@ -164,7 +162,7 @@ $__env->startPush('styles'); ?>
 <?php $__env->stopPush(); endif; ?>
 
 
-<?php if (! $__env->hasRenderedOnce('0f0c920d-9ffb-4f1b-a68e-eb1a9b1ebf8a')): $__env->markAsRenderedOnce('0f0c920d-9ffb-4f1b-a68e-eb1a9b1ebf8a');
+<?php if (! $__env->hasRenderedOnce('6ddbd176-ea41-4f47-9210-7eb65d77eedf')): $__env->markAsRenderedOnce('6ddbd176-ea41-4f47-9210-7eb65d77eedf');
 $__env->startPush('scripts'); ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.min.js"></script>
@@ -172,6 +170,26 @@ $__env->startPush('scripts'); ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
+
+  let fp, start_date, end_date;
+
+  $(document).ready(function () {
+
+    let today = new Date();
+
+    let firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+    let lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+    fp = flatpickr("#dateRange", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        altInput: true,
+        altFormat: "d M, Y",
+        defaultDate: [firstDay, lastDay]
+    });
+
+  });
+
 
   $(function () {
     'use strict'
@@ -316,15 +334,16 @@ $__env->startPush('scripts'); ?>
   });
 
   $('#filterbtn').on('click', function () {
-    let start_date = $('#start_date').val();
-    let end_date = $('#end_date').val();
 
-    console.log(start_date);
-    console.log(end_date);
+    start_date = fp.selectedDates[0]
+        ? fp.formatDate(fp.selectedDates[0], "Y-m-d")
+        : null;
+
+    end_date = fp.selectedDates[1]
+        ? fp.formatDate(fp.selectedDates[1], "Y-m-d")
+        : null;
     let url = new URL(document.URL);
     let urlParams = url.searchParams;
-
-
 
     if (urlParams.has(`start_date`)) {
       urlParams.delete(`start_date`);
@@ -443,13 +462,11 @@ $__env->startPush('scripts'); ?>
   let url = new URL(document.URL);
   let urlParams = url.searchParams;
   if (urlParams.has(`start_date`)) {
-    let start_date = urlParams.get(`start_date`);
-    $('#start_date').val(start_date);
+    start_date = urlParams.get(`start_date`);
   }
 
   if (urlParams.has(`end_date`)) {
-    let end_date = urlParams.get(`end_date`);
-    $('#end_date').val(end_date);
+    end_date = urlParams.get(`end_date`);
   }
 </script>
 <script>
@@ -501,7 +518,7 @@ $__env->startPush('scripts'); ?>
             <div class="col-12">
                 <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-16 mb-1">Good Morning, Anna!</h4>
+                        <h4 class="fs-16 mb-1">Good Morning, <?php echo e(auth()->user()->first_name); ?>!</h4>
                         <p class="text-muted mb-0">Here's what's happening with your store today.</p>
                     </div>
                     <div class="mt-3 mt-lg-0">
@@ -509,7 +526,10 @@ $__env->startPush('scripts'); ?>
                             <div class="row g-3 mb-0 align-items-center">
                                 <div class="col-sm-auto">
                                     <div class="input-group">
-                                        <input type="text" class="form-control border-0 minimal-border dash-filter-picker shadow" data-provider="flatpickr" data-range-date="true" data-date-format="d M, Y" data-deafult-date="01 Jan 2022 to 31 Jan 2022">
+                                        <input                                
+                                          type="text"
+                                          id="dateRange"
+                                          class="form-control border-0 minimal-border dash-filter-picker shadow">
                                         <div class="input-group-text bg-primary border-primary text-white">
                                             <i class="ri-calendar-2-line"></i>
                                         </div>
@@ -678,14 +698,6 @@ $__env->startPush('scripts'); ?>
   </div>
 
   <form class="date-filter-row" id="dateFilterForm">
-    <div class="field">
-      <label for="start_date">Start Date</label>
-      <input type="date" class="form-control" id="start_date" name="start_date" value="<?php echo e($start_date); ?>">
-    </div>
-    <div class="field">
-      <label for="end_date">End Date</label>
-      <input type="date" class="form-control" id="end_date" name="end_date" value="<?php echo e($end_date); ?>">
-    </div>
     <button type="submit" class="btn btn-primary" id="filterbtn">Filter</button>
   </form>
 </div>

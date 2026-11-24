@@ -2,35 +2,33 @@
 
 @section("content")
 <div class="notification-wrapper top-right"></div>
-<div class="step-shell">
-    <div class="step-brand" style=" justify-content: center; display: flex; margin-top: 36px; ">
-        <img src="{{ asset('img/logo.png') }}" width="400px" height="80px">
-    </div>
 
-    <div class="checkout" id="signUpForm">
+<div class="signup-card" id="signUpForm">
 
 
-        @if(($isStepOne && !$isStepTwo && !$isStepThree && !$isStepFour) || (!$isStepOne && !$isStepTwo && !$isStepThree && !$isStepFour))
-            @include("auth.publisher_register.step_one", $stepOne)
+    @if(($isStepOne && !$isStepTwo && !$isStepThree && !$isStepFour) || (!$isStepOne && !$isStepTwo && !$isStepThree && !$isStepFour))
+        @include("auth.publisher_register.step_one", $stepOne)
 
-        @elseif(!$isStepOne && $isStepTwo && !$isStepThree && !$isStepFour)
-            @include("auth.publisher_register.step_two", $stepTwo)
+    @elseif(!$isStepOne && $isStepTwo && !$isStepThree && !$isStepFour)
+        @include("auth.publisher_register.step_two", $stepTwo)
 
-        @elseif(!$isStepOne && !$isStepTwo && $isStepThree && !$isStepFour)
-            @include("auth.publisher_register.step_three")
+    @elseif(!$isStepOne && !$isStepTwo && $isStepThree && !$isStepFour)
+        @include("auth.publisher_register.step_three")
 
-        @elseif(!$isStepOne && !$isStepTwo && !$isStepThree && $isStepFour)
-            @include("auth.publisher_register.step_four")
+    @elseif(!$isStepOne && !$isStepTwo && !$isStepThree && $isStepFour)
+        @include("auth.publisher_register.step_four")
 
-        @endif
+    @endif
 
-    </div>
+</div>
 
+<div class="mb-5 text-center">
+    <p class="mb-0">Already have an account ? <a href="{{ route('login', ['type' => $account]) }}" class="fw-semibold text-primary text-decoration-underline"> Signin </a> </p>
 </div>
 @endsection
 
 @push("top_scripts")
-
+    <script src="{{ asset('assets/js/pages/form-validation.init.js') }}"></script>
     <script>
         document.addEventListener('click', function (e) {
             const closeBtn = e.target.closest('[data-toast="close"]');
@@ -58,21 +56,12 @@
             const notificationShocase = $('.notification-wrapper');
 
             toast = `
-                        <div class="atbd-notification-box notification-${type} notification-${toastCount}">
-                            <div class="atbd-notification-box__content media">
-                                <div class="atbd-notification-box__icon">
-                                    <i class="fas fa-times"></i>
-                                </div>
-                                <div class="atbd-notification-box__text media-body">
-                                    <h6>Error List</h6>
-                                    ${content}
-                                </div>
-                            </div>
-                            <span class="atbd-notification-box__close" data-toast="close">
-                                <i class="fas fa-times"></i>
-                            </span>
-                        </div>
-                        `;
+                <div class="alert alert-${type} alert-dismissible fade show material-shadow notification-${toastCount}" role="alert">
+                    <strong class="text-dark"> Error Lists </strong> 
+                    ${content}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                `;
 
             notificationShocase.append(toast);
             toastCount++;
@@ -519,16 +508,4 @@
 @pushonce('scripts')
 <script src="{{ \App\Helper\Static\Methods::staticAsset("vendor_assets/js/phone/intlTelInput.js") }}"></script>
 <script src="{{ \App\Helper\Static\Methods::staticAsset("vendor_assets/js/select2.full.min.js") }}"></script>
-<script>
-    $(document).ready(function(){
-        var stepOneData = localStorage.getItem('stepOne');
-        if(stepOneData){
-            var data = JSON.parse(stepOneData);
-            $('#first_name').val(data.first_name);
-            $('#last_name').val(data.last_name);
-            $('#email').val(data.email);
-            $('#password').val(data.password);
-        }
-    })
-</script>
 @endpushonce
