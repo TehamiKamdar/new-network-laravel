@@ -17,127 +17,27 @@
         margin-bottom: 10px !important;
     }
 
-    .chartjs-tooltip {
-        opacity: 1;
-        position: absolute;
-        background: #fff;
-        box-shadow: 0 8px 10px rgba(146, 153, 184, 0.0823529412);
-        padding: 10px 12px !important;
-        border-radius: 3px;
-        border: 1px solid #f1f2f6;
-        min-width: 80px;
-        -webkit-transition: all 0.5s ease;
-        transition: all 0.5s ease;
-        pointer-events: none;
-        transform: translate(-50%, 5%);
-        z-index: 222;
-        top: 0;
-        left: 0;
+    .legend-static {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
     }
 
-    .chartjs-tooltip:before {
-        position: absolute;
-        content: "";
-        border-top: 5px solid #fff;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        bottom: -5px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .tooltip-title {
-        font-size: 12px;
-        font-weight: 500 !important;
-        font-family: "Inter", sans-serif;
-        text-transform: capitalize;
-        margin-bottom: 4px;
-    }
-
-    .chartjs-tooltip-key {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        background: "pink";
-        margin-right: 10px;
-    }
-
-    .chartjs-tooltip table tbody td {
+    .legend-static .custom-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-right: 18px;
         font-size: 13px;
-        font-weight: 500;
-        padding-bottom: 3px;
-        white-space: nowrap;
+        color: var(--vz-secondary-color);
     }
 
-    .chartjs-tooltip table tbody td .data-label {
-        margin-left: 3px;
-        color: #868eae;
-    }
-
-    .chartjs-size-monitor,
-    .chartjs-size-monitor-expand,
-    .chartjs-size-monitor-shrink {
-        position: absolute;
-        direction: ltr;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        overflow: hidden;
-        pointer-events: none;
-        visibility: hidden;
-        z-index: -1;
-    }
-
-    .chartjs-render-monitor {
-        animation: chartjs-render-animation 1ms;
-    }
-</style>
-<style type="text/css">
-    /* Chart.js */
-    @keyframes chartjs-render-animation {
-        from {
-            opacity: .99
-        }
-
-        to {
-            opacity: 1
-        }
-    }
-
-    .chartjs-render-monitor {
-        animation: chartjs-render-animation 1ms
-    }
-
-    .chartjs-size-monitor,
-    .chartjs-size-monitor-expand,
-    .chartjs-size-monitor-shrink {
-        position: absolute;
-        direction: ltr;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        overflow: hidden;
-        pointer-events: none;
-        visibility: hidden;
-        z-index: -1
-    }
-
-    .chartjs-size-monitor-expand>div {
-        position: absolute;
-        width: 1000000px;
-        height: 1000000px;
-        left: 0;
-        top: 0
-    }
-
-    .chartjs-size-monitor-shrink>div {
-        position: absolute;
-        width: 200%;
-        height: 200%;
-        left: 0;
-        top: 0
+    .legend-static .dot {
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        min-width: 9px;
+        border-radius: 50%;
     }
 </style>
 @endpushonce
@@ -750,11 +650,9 @@
 
     <div class="card card-pad mb-3">
 
-        <div class="section-head">
-            <div>
-                <h2>Performance Overview</h2>
-                <div class="sub">Click a metric to see its trend</div>
-            </div>
+        <div class="card-header border-0">
+            <h4 class="card-title mb-0 flex-grow-1">Performance Overview</h4>
+            <div class="sub">Click a metric to see its trend</div>
         </div>
         <div class="row">
             <div class="col-lg-12" id="performanceOverview">

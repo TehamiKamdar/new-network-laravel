@@ -104,6 +104,16 @@
   --vz-font-weight-semibold:600; --vz-font-weight-bold:700;
 }
 
+[data-bs-theme="dark"] .btn-check:checked + .btn,
+[data-bs-theme="dark"] .btn.active,
+[data-bs-theme="dark"] .btn.show,
+[data-bs-theme="dark"] .btn:first-child:active,
+[data-bs-theme="dark"] :not(.btn-check) + .btn:active {
+    color: var(--vz-btn-active-color) !important;
+    background-color: var(--vz-btn-active-bg) !important;
+    border-color: var(--vz-btn-active-border-color) !important;
+}
+
 [data-theme=galaxy][data-bs-theme=dark]:root {
     --vz-primary-text-emphasis: #6674a1;
     --vz-secondary-text-emphasis: #5d92f4;
@@ -8295,6 +8305,12 @@ button {
     --vz-btn-active-border-color: transparent
 }
 
+[data-bs-theme="dark"] .btn-soft-dark {
+    --vz-btn-active-bg: #fff;
+    --vz-btn-active-color: #313437;
+    --vz-btn-active-border-color: #313437;
+}
+
 .btn-ghost-dark {
     --vz-btn-color: var(--vz-dark);
     --vz-btn-bg: transparent;
@@ -8330,6 +8346,10 @@ button {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center
+}
+
+[data-bs-theme="dark"] .label-icon {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .btn-label.btn-light .label-icon {
